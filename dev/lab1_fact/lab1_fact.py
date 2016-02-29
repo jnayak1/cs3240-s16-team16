@@ -2,6 +2,7 @@
 # dmm7aj
 # CS3240
 
+#Fix issue 3
 #lab1_fact
 
 
