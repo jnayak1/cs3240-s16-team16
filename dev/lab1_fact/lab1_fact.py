@@ -1,8 +1,8 @@
-# Derek McMahon
+# Derek McMahon (Hey)
 # dmm7aj
 # CS3240
 #lab1_fact
-
+# was here, too.
 def factorial1(n):
     if n < 0:
         raise ValueError("n < 0")
