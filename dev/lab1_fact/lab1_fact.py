@@ -1,7 +1,11 @@
 # Derek McMahon (Hey)
 # dmm7aj
 # CS3240
+
 #lab1_fact
+
+
+#lab1_opinion
 
 # was here, too.
 def factorial1(n):
