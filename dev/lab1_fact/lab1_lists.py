@@ -1,7 +1,7 @@
 #Derek McMahon
 #dmm7aj
 #CS3240
-#lab1_lists
+#lab1_lists avh5nm
 
 def maxmin(l):
     max = None
