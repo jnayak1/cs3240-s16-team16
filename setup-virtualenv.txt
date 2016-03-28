@@ -1,0 +1,50 @@
+-First you have to find the path to python-3.4.3
+	python3 -c "import os; print(os.environ['_'])"
+	// this will print out the full path to python on your machine
+
+
+-Make a virtualenv using vitualenvwrapper (need vitualenv and vitualenvwrapper installed)
+	mkvitualenv --python=<path_to_python>  softdev
+
+	// virtualenv for windows: https://teamtreehouse.com/library/setting-up-a-local-python-environment/installing-python-and-python-libraries-locally/using-virtualenv
+	// virtualenvwrapper for windows: http://virtualenvwrapper.readthedocs.org/en/latest/install.html
+
+
+-Switch to virtual environment
+	workon softdev
+
+
+-Check version of python
+	python --version
+	// should print out Python 3.4.<something>
+
+
+-Install requirements using pip. (need psycopg2 already installed on your machine)
+	pip install -r /path/to/requirements.txt
+	// This will install correct versions of Django and other packages needed.
+	// If psycopg2 is not installed and you're getting errors about this:
+		// https://github.com/nwcell/psycopg2-windows/blob/master/README.md
+
+
+-Check packages installed
+	pip freeze
+	// should output:
+	/*
+		dj-database-url==0.4.0
+		Django==1.8.8
+		gunicorn==19.4.5
+		psycopg2==2.6.1
+	*/
+	// this list will be longer at end of project
+
+-Everytime you're working on project
+	workon softdev
+
+-Done working on project
+	deactivate
+
+-Anytime you've added packages to your virtual environment (softdev) that are needed for project to work
+	pip freeze > requirements.txt
+	// windows might have slightly different syntax
+	// overwrites requirements.txt with result from 'pip freeze'
+
