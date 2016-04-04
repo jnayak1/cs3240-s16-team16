@@ -24,6 +24,15 @@ class Page(models.Model):
     def __str__(self):      #For Python 2, use __str__ on Python 3
         return self.title
 
+class Report(models.Model):
+    #reporter = models.ForeignKey(Reporter)
+    description = models.CharField(max_length=128)
+    detailed_description = models.CharField(max_length=255)
+    public = models.BooleanField(default=0)
+    tags = models.CharField(max_length=255)
+    def __str__(self):
+	return self.description
+
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
