@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-
+    <link href="{{ STATIC_URL }}center.css" rel="stylesheet" type="text/css" />
     <head>
-	<center><img src="../../static/logo.png">
-        <title>safeCollab Login Page</title><center>
-	
+	<img src="../../static/logo.png">
+        <title>safeCollab Login Page</title>
     </head>
 
     <body>
+	<link href="{{ STATIC_URL }}center.css" rel="stylesheet" type="text/css" />
         {% if user.is_authenticated %}
         <h1>Hello {{ user.username }}, welcome to safeCollab!</h1>
         {% else %}
