@@ -31,7 +31,7 @@ class Report(models.Model):
     public = models.BooleanField(default=0)
     tags = models.CharField(max_length=255)
     def __str__(self):
-	return self.description
+        return self.description
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
