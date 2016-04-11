@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Message(models.Model):
-	sender = models.OneToOneField(User)
+	sender = models.ForeignKey(User)
 	content = models.TextField()
 
 class ConversationLog(models.Model):
