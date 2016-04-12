@@ -34,6 +34,12 @@
   			<div class="searchbar">
   				<input type="text" name="Search"></input>
 	  		</div>
+	  		<button onclick="openNewConversation()">New Conversation</button>
+	  		<script>
+				function openNewConversation() {
+					window.open("/private_messages/new_conversation");
+				}
+	  		</script>
 			<ul class="nav nav-sidebar">
 				{% for conversation in conversations %}
 				<li class="contacts">

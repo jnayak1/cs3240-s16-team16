@@ -48,3 +48,8 @@ def getConversation(request, conversationID):
 	c = RequestContext(request, c)
 	return render(request, 'private_messages.html', c)
 
+def newConversation(request):
+	return render(request, 'new_conversation.html', {})
+
+#def addConversation(request, conversationID):
+#	if request.method == 'POST': 
