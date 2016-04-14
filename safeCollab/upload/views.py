@@ -43,11 +43,6 @@ def upload_file(request):
         return render(request, "upload.html", context)
 
 
-def handle_uploaded_file(f, n):
-    name, fileType = f.name.split(".")
-    encrypt_file(f, n)
-
-
 def uploaded(request):
     if request.method == 'POST':
         decrypt_file(request.POST['file'])
@@ -66,6 +61,11 @@ def uploaded(request):
 
 def failed(request):
     return render(request, "failure.html", {})
+
+
+def handle_uploaded_file(f, n):
+    name, fileType = f.name.split(".")
+    encrypt_file(f, n)
 
 
 def encrypt_file(input_file, n):

@@ -1,6 +1,6 @@
-from django.conf.urls import include, url
-from django.contrib import admin
-from newsletter.views import home, upload_file, uploaded, failed
+from django.conf.urls import url
+
+from safeCollab.upload.views import upload_file, uploaded, failed
 
 urlpatterns = [
     #url(r'^$', home, name = 'homepage'),

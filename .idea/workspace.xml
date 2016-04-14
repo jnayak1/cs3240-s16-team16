@@ -2,23 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b394786-c958-40bc-ac9e-5676c569642a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/forms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/templates/Download.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/templates/failure.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/templates/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/templates/success.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/templates/upload.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/newsletter/urls.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/upload/profile_image_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/upload/profile_image_view.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/upload/profileimage_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/EncryptTest.docx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/EncryptTest.docx.enc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/Itworks.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/Itworks.txt.enc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_2TRoDkw.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_3lCmdYj.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_KsCfcyo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_LBYgEEb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_SWCzPXx.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_fiiI7Jl.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_riL2EnH.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_yJDwti6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/forms.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0002_auto_20160409_1925.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0003_auto_20160409_2343.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0004_delete_uploadfile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0005_publickey.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0006_auto_20160410_1441.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/Download.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/failure.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/home.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/success.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/upload.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/settings.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/wsgi.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profile_image_form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profile_image_view.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profileimage_list.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/tango_with_django_project/tango_with_django_project/settings.py" afterPath="$PROJECT_DIR$/dev/tango_with_django_project/tango_with_django_project/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/settings.py" afterPath="$PROJECT_DIR$/safeCollab/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/urls.py" afterPath="$PROJECT_DIR$/safeCollab/urls.py" />
     </list>
     <ignored path="cs3240-s16-team16.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,43 +68,77 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/newsletter/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
+      <file leaf-file-name="blue-checkmark_2TRoDkw.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_2TRoDkw.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="success.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/newsletter/templates/success.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="upload.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/newsletter/templates/upload.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
+      <file leaf-file-name="blue-checkmark_3lCmdYj.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_3lCmdYj.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/safeCollab/settings.py">
+        <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.023909986">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.30312034">
+              <caret line="12" column="65" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_fiiI7Jl.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_fiiI7Jl.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_KsCfcyo.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_KsCfcyo.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_LBYgEEb.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_LBYgEEb.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_riL2EnH.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_riL2EnH.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_SWCzPXx.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_SWCzPXx.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blue-checkmark_yJDwti6.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_yJDwti6.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Itworks.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/safeCollab/media/Itworks.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -90,8 +149,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -115,7 +174,6 @@
         <option value="$PROJECT_DIR$/templates/upload/profile_image_form.html" />
         <option value="$PROJECT_DIR$/upload/forms.py" />
         <option value="$PROJECT_DIR$/upload/urls.py" />
-        <option value="$PROJECT_DIR$/upload/views.py" />
         <option value="$PROJECT_DIR$/templates/newsletter/home.html" />
         <option value="$PROJECT_DIR$/newsletter/templates/home.html" />
         <option value="$PROJECT_DIR$/safeCollab/urls.py" />
@@ -127,9 +185,11 @@
         <option value="$PROJECT_DIR$/newsletter/models.py" />
         <option value="$PROJECT_DIR$/newsletter/templates/Download.html" />
         <option value="$PROJECT_DIR$/newsletter/views.py" />
-        <option value="$PROJECT_DIR$/safeCollab/settings.py" />
         <option value="$PROJECT_DIR$/newsletter/templates/success.html" />
         <option value="$PROJECT_DIR$/newsletter/templates/upload.html" />
+        <option value="$PROJECT_DIR$/safeCollab/settings.py" />
+        <option value="$PROJECT_DIR$/upload/templates/success.html" />
+        <option value="$PROJECT_DIR$/upload/views.py" />
       </list>
     </option>
   </component>
@@ -139,10 +199,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="x" value="794" />
+    <option name="width" value="813" />
+    <option name="height" value="867" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -169,8 +228,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -213,39 +272,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newsletter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs3240-s16-team16" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs3240-s16-team16" />
+              <option name="myItemId" value="safeCollab" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newsletter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs3240-s16-team16" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs3240-s16-team16" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="media" />
+              <option name="myItemId" value="safeCollab" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -262,6 +293,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Derek\PycharmProjects\cs3240-s16-team16\ztemp" />
       <recent name="C:\Users\Derek\PycharmProjects\cs3240-s16-team16\newsletter\templates" />
       <recent name="C:\Users\Derek\PycharmProjects\cs3240-s16-team16\templates\newsletter" />
       <recent name="C:\Users\Derek\PycharmProjects\cs3240-s16-team16" />
@@ -498,13 +530,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="794" y="0" width="813" height="867" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.145" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2910916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32628798" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -516,7 +549,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760897" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32760897" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -559,25 +591,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/newsletter/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/success.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/upload.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/upload.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -585,7 +599,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/settings.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
@@ -593,17 +607,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/views.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#345#723#0" expanded="false" />
+            <element signature="e#1841#2444#0" expanded="false" />
+            <element signature="e#2481#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/success.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/success.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
@@ -611,7 +628,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/upload.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/upload.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
@@ -619,14 +636,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/upload/profile_image_form.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/templates/upload/profile_image_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/settings.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
@@ -648,7 +665,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/urls.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
@@ -683,13 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06995885">
@@ -718,34 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/upload/profile_image_view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/upload/profileimage_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/upload/profile_image_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43527737">
-          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/tango_with_django_project/tango_with_django_project/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -760,114 +742,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/failure.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/failure.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09672831">
           <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.851851">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.037037">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7777777">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/Download.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/Download.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26153848">
           <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/home.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37362638">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/forms.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.2222223">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34801763">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/EncryptTest.docx.enc">
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/EncryptTest.docx.enc">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/Itworks.txt.enc">
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/Itworks.txt.enc">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/Itworks.txt">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07068607">
-          <caret line="2" column="83" selection-start-line="2" selection-start-column="83" selection-end-line="2" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/views.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
+        <state vertical-scroll-proportion="-14.481482">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/upload.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/success.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.074074">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#345#723#0" expanded="false" />
+            <element signature="e#1841#2444#0" expanded="false" />
+            <element signature="e#2481#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/success.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newsletter/templates/upload.html">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -875,10 +845,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/settings.py">
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023909986">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/templates/upload/profileimage_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/templates/upload/profile_image_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/templates/upload/profile_image_view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/upload/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7777777">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_2TRoDkw.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_3lCmdYj.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_fiiI7Jl.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_KsCfcyo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_LBYgEEb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_riL2EnH.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_SWCzPXx.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_yJDwti6.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/media/Itworks.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30312034">
+          <caret line="12" column="65" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="65" />
           <folding />
         </state>
       </provider>
