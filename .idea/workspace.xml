@@ -2,48 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b394786-c958-40bc-ac9e-5676c569642a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cs3240team16/db.sqlite3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/db.sqlite3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/.forms.py.swp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/.forms.py.swp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/.models.py.swp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cs3240team16/db.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/apps.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/category.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/migrations/0001_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/migrations/0002_auto_20160404_0258.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/migrations/0003_report_userprofile.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/migrations/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/login/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/manage.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/populate_login.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/0001_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/0002_auto_20160411_1428.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/0003_auto_20160411_1625.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/center.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap-theme.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap-theme.min.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/bootstrap.min.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/css/dashboard.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/static/js/npm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/add_category.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/add_page" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/add_page.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/category.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/login_page.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/register.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/new_conversation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/private_messages.html" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/EncryptTest.docx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/EncryptTest.docx.enc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/Itworks.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/Itworks.txt.enc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_2TRoDkw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_3lCmdYj.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_KsCfcyo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_LBYgEEb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_SWCzPXx.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_fiiI7Jl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_riL2EnH.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/media/profile/2016/04/04/blue-checkmark_yJDwti6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/forms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0002_auto_20160409_1925.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0003_auto_20160409_2343.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0004_delete_uploadfile.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0005_publickey.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/0006_auto_20160410_1441.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/Download.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/failure.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/home.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/success.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/templates/upload.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/newsletter/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/wsgi.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profile_image_form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profile_image_view.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/upload/profileimage_list.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/safeCollab/__init__.py" afterPath="$PROJECT_DIR$/safeCollab/login/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/safeCollab/settings.py" afterPath="$PROJECT_DIR$/safeCollab/safeCollab/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/safeCollab/urls.py" afterPath="$PROJECT_DIR$/safeCollab/safeCollab/urls.py" />
     </list>
     <ignored path="cs3240-s16-team16.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,13 +91,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="blue-checkmark_2TRoDkw.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_2TRoDkw.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="blue-checkmark_3lCmdYj.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/safeCollab/media/profile/2016/04/04/blue-checkmark_3lCmdYj.png">
           <provider selected="true" editor-type-id="images">
@@ -85,8 +101,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30312034">
-              <caret line="12" column="65" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.45468053">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -190,6 +206,8 @@
         <option value="$PROJECT_DIR$/safeCollab/settings.py" />
         <option value="$PROJECT_DIR$/upload/templates/success.html" />
         <option value="$PROJECT_DIR$/upload/views.py" />
+        <option value="$PROJECT_DIR$/safeCollab/safeCollab/urls.py" />
+        <option value="$PROJECT_DIR$/safeCollab/safeCollab/settings.py" />
       </list>
     </option>
   </component>
@@ -829,14 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -954,10 +964,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4116809">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/safeCollab/safeCollab/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30312034">
-          <caret line="12" column="65" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.45468053">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>

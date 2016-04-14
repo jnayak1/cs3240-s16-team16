@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+	<center><img src="../../static/logo.png">
+        <title>safeCollab Login Page</title><center>
+	<style>
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 100;
+	    overflow: hidden;
+
+	}
+
+	li {
+	    float: left;
+	}
+
+	li a {
+	    display: inline-block;
+	    color: black;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	}
+
+	li a:hover {
+	    background-color: #ADD8e6;
+	}
+	</style>
+    </head>
+
+    <body>
+	<center>
+	<ul id="menu">
+	{% if user.is_authenticated %}
+
+	<link rel="stylesheet" type="text/css" href="../static/horizontal.css">
+        <li><a href="/login/restricted/">Restricted Page</a><br /></li>
+        <li><a href="/login/add_category/">Add a New Category</a><br /></li>
+        <li><a href="/login/add_page/">Add a New Page</a><br /></li>
+        <li><a href="/private_messages/">Messages</a><br/></li>
+        <li><a href="/login/logout/">Logout</a><br /></li>
+	
+	{% endif %}
+	</ul>
+	</center>
+        {% if user.is_authenticated %}
+        <h1>Hello {{ user.username }}, welcome to safeCollab!</h1>
+        {% else %}
+        <h1>Hello, welcome to safeCollab!</h1>
+        {% endif %}
+
+        <!--<b>Please Login:</b>
+        <p>Username: <input type="text" id="username"></></p>
+        <p>Password: <input type="text" id="pass"></></p>
+
+        <input type="submit" value="Submit"></> 
+          {% if categories %}
+            <ul>
+                {% for category in categories %}
+                 Following line changed to add an HTML hyperlink 
+                <li><a href="/login/category/{{ category.slug }}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+       {% else %}
+            <strong>There are no categories present.</strong>
+       {% endif %} 
+       <a href="/login/login_page/">Login</a> <br>
+       <a href="/login/register/">Register Here</a><br />
+       <a href="/login/add_category/">Add a New Category</a><br /> -->
+
+        {% if user.is_authenticated %}
+	<!-- Do nothing -->
+        {% else %}
+        <a href="/login/login_page/">Login</a><br />
+        <a href="/login/register/">Register Here</a><br />
+        {% endif %}
+
+
+       
+       
+    </body>
+
+</html>

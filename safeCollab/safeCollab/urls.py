@@ -21,4 +21,6 @@ urlpatterns = [
     #url(r'^upload/', include('upload.urls')),
     url(r'^upload/', include('upload.urls')),
     url(r'^$', include('upload.urls')),
+    url(r'^login/', include('login.urls')),
+    url(r'^private_messages/', include('private_messages.urls')),
 ]
