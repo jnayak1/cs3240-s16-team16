@@ -7,34 +7,42 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
-from reports.models import Folder, Report, HomeFolder
+from reports.models import Folder, Report
 
 
 # Create your views here.
 
 @login_required
 def home(request):
+	homeFolder = Folder.objects.filter(owner=request.user).filter(parentFolder=None)[0]
 	folders = Folder.objects.filter(owner=request.user).exclude(parentFolder=None)
-	reports = Report.objects.filter(collaborators=request.user)
-	pwd = HomeFolder.objects.filter(owner=request.user)[0]
-	c = Context({'folders': folders, 'reports': reports, 'pwd': pwd})
+	reports = Report.objects.filter(collaborators=request.user, parentFolder=homeFolder)
+	path = [homeFolder]
+	c = Context({'folders': folders, 'reports': reports, 'path': path})
 	c = RequestContext(request, c)
 	return render(request, 'report_folder.html', c)
 
 @login_required
 def getReport(request, reportID):
 	report = Report.objects.get(id=reportID)
-	c = Context({'report': report})
+	path = [report]
+	while path[0].parentFolder != None:
+		path.insert(0,path[0].parentFolder)
+	path.pop()
+	c = Context({'report': report, 'path': path})
 	c = RequestContext(request, c)
 	return render(request, 'report.html', c)
 
 @login_required
 def getFolder(request, folderID):
-	folder = Folder.objects.filter(id=folderID)
-	folders = Folder.objects.filter(owner=request.user, parentFolder=folder)
-	reports = Report.objects.filter(collaborators=request.user, parentFolder=folder)
-	pwd = Folder.objects.filter(owner=request.user)
-	c = Context({'folders': folders, 'reports': reports, 'pwd': pwd})
+	pwd = Folder.objects.get(id=folderID)
+	folders = Folder.objects.filter(owner=request.user, parentFolder=pwd)
+	reports = Report.objects.filter(collaborators=request.user, parentFolder=pwd)
+	path = [pwd]
+	while path[0].parentFolder != None:
+		path.insert(0,path[0].parentFolder)
+	path.pop()
+	c = Context({'folders': folders, 'reports': reports, 'path': path, 'pwd':pwd})
 	c = RequestContext(request, c)
 	return render(request, 'report_folder.html', c)
 

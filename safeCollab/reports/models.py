@@ -10,12 +10,10 @@ class File(models.Model):
 	timeStamp = models.DateTimeField(auto_now=True)
 	content = models.FileField(upload_to='files')
 
-class HomeFolder(models.Model):
+class Folder(models.Model):
 	owner = models.ForeignKey(User)
 	title = models.CharField(max_length=100)
-
-class Folder(HomeFolder):
-	parentFolder = models.ForeignKey('HomeFolder', related_name='hi')
+	parentFolder = models.ForeignKey('self', blank=True, null=True)	
 
 class Report(models.Model):
 	title = models.CharField(max_length=50)
@@ -25,4 +23,4 @@ class Report(models.Model):
 	files = models.ManyToManyField(File, blank=True)
 	private = models.BooleanField(default=True)
 	collaborators = models.ManyToManyField(User)
-	parentFolder = models.ForeignKey(HomeFolder)
+	parentFolder = models.ForeignKey(Folder)
