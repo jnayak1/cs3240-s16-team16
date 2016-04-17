@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<h1>New Conversation</h1>
-		<form id="new_conversation" method="post" action="/login/login_page/">
+		<form id="new_conversation" method="post" action="/private_messages">
 			{% csrf_token %}
 			Participants: <input type="text" name="participants" value="" size="50" />
 			<p>Please separate participants by commas.</p>

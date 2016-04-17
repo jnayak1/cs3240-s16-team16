@@ -34,32 +34,23 @@ def getConversation(request, conversationID):
 	active_conversation = ConversationLog.objects.get(pk=conversationID)
 	c = Context({'conversations': conversations, 'active_conversation': active_conversation})
 	if request.method == 'POST':
-	#	form = "POTATO"
-	#if 'messenger' in request.POST:
-		form = SendMessage()	
-		if form.is_valid():
-			send_message = SendMessage(request.POST)
-			message_content = send_message.data['content']
-			message_sender = request.user
-			message = Message(sender=message_sender, content=message_content)
-			message.save()
-			active_conversation.log.add(message)
-		#elif "new_conversation" in request.POST:
-		#	form2 = ConversationForm()
-		#	if form2.is_valid():
-		#		new_conversation = ConversationForm(request.POST)
-		#		conversation_members = new_conversation.data['content']
-					
+
+		if "message" in request.POST:
+			form = SendMessage(request.POST)
+			if form.is_valid():
+				send_message = SendMessage(request.POST)
+				message_content = send_message.data['content']
+				message_sender = request.user
+				message = Message(sender=message_sender, content=message_content)
+				message.save()
+				active_conversation.log.add(message)
 	else:
 		form = SendMessage()
-		#form2 = ConversationForm()
 	c['form'] = form
 	c = RequestContext(request, c)
 	return render(request, 'private_messages.html', c)
-#@csrf_exempt
+
 def newConversation(request):
-	#if request.method == 'POST':
-	#	form = 
 	return render(request, 'new_conversation.html', {})
 
 #def addConversation(request, conversationID):
