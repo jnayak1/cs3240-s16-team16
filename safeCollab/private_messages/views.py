@@ -91,12 +91,13 @@ def newConversation(request):
 				
 				
 				message_sender = request.user
-				message = Message(sender=request.user, content=log)
+				message = Message(sender=message_sender, content=log)
 				message.save()
 				active_conversation.log.add(message)
 				active_conversation.save()
+				
 			#return HttpResponse(users[0])
-			return HttpResponse([x for x in users if x])
+			#return HttpResponse([x for x in users if x])
 		else:
 			return HttpResponse("One or more of your fields is blank.")
 			#return HttpResponse("WOAH")	

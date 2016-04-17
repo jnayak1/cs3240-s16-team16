@@ -66,7 +66,7 @@ def newConversation(request):
 			nonexistentusers = []
 			for x in pattern.split(participants):
 				if x:
-					if x in User.objects.all().values_list('username', flat=True):
+					if User.objects.get(username=x):
 						users.append(x)
 					else:
 						nonexistentusers.append(x)
@@ -91,12 +91,13 @@ def newConversation(request):
 				
 				
 				message_sender = request.user
-				message = Message(sender=request.user, content=log)
+				message = Message(sender=message_sender, content=log)
 				message.save()
 				active_conversation.log.add(message)
 				active_conversation.save()
+				
 			#return HttpResponse(users[0])
-			return HttpResponse([x for x in users if x])
+			#return HttpResponse([x for x in users if x])
 		else:
 			return HttpResponse("One or more of your fields is blank.")
 			#return HttpResponse("WOAH")	
