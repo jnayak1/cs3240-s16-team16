@@ -50,85 +50,152 @@
   			{{report.longDescription}}
   		</div>
   	</div>
-  	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
-  		<h4>Files:</h4>
-  		<div class="add-delete">
-  			<span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" data-target="#myModal"></span>
-  			<span class="glyphicon glyphicon-minus btn btn-danger"></span>
-  		</div>
-  		<div class="halfPanelContents col-md-11">
-  		  {% for file in report.files.all %}
-  			<a>
-  				<div class="media folder">
-  					<div class="media-left">
-  						<input type="checkbox" aria-label="...">
-  					</div>
-  					<div class="media-body">
-  						<span class="media-object glyphicon glyphicon-save-file"></span>
-  						<h4 class="media-heading">{{file.title}}</h4>
-  					</div>
-  				</div>
-  			</a>
-        {% endfor %}
-  		</div>
-  	</div>
-  	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  		<div class="modal-dialog" role="document">
-  			<div class="modal-content">
-  				<div class="modal-header">
-  					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  					<h4 class="modal-title" id="myModalLabel">Upload File</h4>
-  				</div>
-  				<div class="modal-body">
-  					...
-  				</div>
-  				<div class="modal-footer">
-  					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  					<button type="button" class="btn btn-primary">Upload</button>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
-  	<div class="halfPanel panel panel-default col-md-5">
-  		<h4>Collaborators:</h4>
-  		<div class="add-delete">
-  			<span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" data-target="#myModal2"></span>
-  			<span class="glyphicon glyphicon-minus btn btn-danger"></span>
-  		</div>
-  		<div class="halfPanelContents col-md-11">
-  			{% for person in report.collaborators.all %}
-  			<a>
-  				<div class="media folder">
-  					<div class="media-left">
-  						<input type="checkbox" aria-label="...">
-  					</div>
-  					<div class="media-body">
-  						<span class="media-object glyphicon glyphicon-user"></span>
-  						<h4 class="media-heading">{{person}}</h4>
-  					</div>
-  				</div>
-  			</a>
-  			{% endfor %}
-  		</div>
-  	</div>
-  	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  		<div class="modal-dialog" role="document">
-  			<div class="modal-content">
-  				<div class="modal-header">
-  					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  					<h4 class="modal-title" id="myModalLabel">Add Collaborator</h4>
-  				</div>
-  				<div class="modal-body">
-  					...
-  				</div>
-  				<div class="modal-footer">
-  					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  					<button type="button" class="btn btn-primary">Add</button>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
+    <form method='POST'>
+    	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
+    		<h4>Files:</h4>
+    		<div class="add-delete">
+    			<label>
+            <input type="radio"/>
+            <span type="radio" class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
+            data-target="#uploadModal"></span>
+          </label>
+          <label>
+            <input type="radio"/>
+            <span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
+            data-target="#deleteFileModal"></span>
+          </label>
+    		</div>
+    		<div class="halfPanelContents col-md-11">
+    		  {% for file in report.files.all %}
+    			<a>
+    				<div class="media folder">
+    					<div class="media-left">
+    						<input type="checkbox" aria-label="...">
+    					</div>
+    					<div class="media-body">
+    						<span class="media-object glyphicon glyphicon-save-file"></span>
+    						<h4 class="media-heading">{{file.title}}</h4>
+    					</div>
+    				</div>
+    			</a>
+          {% endfor %}
+    		</div>
+    	</div>
+      <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Upload File</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" 
+      aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete File</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you would like to delete the selected files?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form method='POST'>
+    	<div class="halfPanel panel panel-default col-md-5">
+    		<h4>Collaborators:</h4>
+    		<div class="add-delete">
+          <label>
+            <input type="radio"/>
+      			<span type="radio" class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
+            data-target="#addCollabModal"></span>
+          </label>
+          <label>
+            <input type="radio"/>
+      			<span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
+            data-target="#removeCollabModal"></span>
+          </label>
+    		</div>
+    		<div class="halfPanelContents col-md-11">
+    			{% for person in report.collaborators.all %}
+    			<a>
+    				<div class="media folder">
+    					<div class="media-left">
+    						<input type="checkbox" aria-label="...">
+    					</div>
+    					<div class="media-body">
+    						<span class="media-object glyphicon glyphicon-user"></span>
+    						<h4 class="media-heading">{{person}}</h4>
+    					</div>
+    				</div>
+    			</a>
+    			{% endfor %}
+    		</div>
+    	</div>
+    	<div class="modal fade" id="addCollabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    		<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    					<h4 class="modal-title" id="myModalLabel">Add Collaborator</h4>
+    				</div>
+    				<div class="modal-body">
+    					...
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    					<button type="button" class="btn btn-primary">Add</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+      <div class="modal fade" id="removeCollabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Remove Collaborator</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you would like to remove the selected collaborators?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   	<style type="text/css">
+/*    http://stackoverflow.com/questions/17541614/use-image-instead-of-radio-button
+*/  label > input{ /* HIDE RADIO */
+      visibility: hidden; /* Makes input not-clickable */
+      position: absolute; /* Remove input from document flow */
+    }
+    label > input + span{ /* IMAGE STYLES */
+      cursor:pointer;
+      border:2px solid transparent;
+    }
+    label > input:checked + span{ /* (RADIO CHECKED) IMAGE STYLES */
+      border:2px solid #f00;
+    }
     body{
   		background-color: white;
   	}
