@@ -26,11 +26,14 @@
       <![endif]-->
   </head>
   <body>
-  	<!-- <div class="path col-md-12">
+  	<div class="path col-md-12">
   		<ol class="breadcrumb">
-			<li><a class="active" href="#">{{ pwd.title }}</a></li>
+        {% for folder in path %}
+			 <li><a href="/reports/folder/{{folder.id}}">{{ folder.title }}</a></li>
+        {% endfor %}
+        <li><a class="active">{{ pwd.title }}</a></li>
 		</ol>
-  	</div> -->
+  	</div>
   	<div class="contents col-md-offset-1 col-md-10">
   		<div class="new_report col-md-offset-1 col-md-3">
   			<span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" data-target="#addModal"></span>
@@ -115,7 +118,6 @@ body{
 	border-radius: 5px;
 	min-height: 400px;
 	padding-top: 10px;
-	margin-top: 40px;
 }
 .folder{
 	padding-top: 10px;
