@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'login',
     'private_messages',
+    'reports',
 )
 
 PASSWORD_HASHERS = (

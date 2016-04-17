@@ -1,0 +1,28 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+
+# Create your models here.
+
+class File(models.Model):
+	title = models.CharField(max_length=50)
+	publisher = models.ForeignKey(User)
+	timeStamp = models.DateTimeField(auto_now=True)
+	content = models.FileField(upload_to='files')
+
+class HomeFolder(models.Model):
+	owner = models.ForeignKey(User)
+	title = models.CharField(max_length=100)
+
+class Folder(HomeFolder):
+	parentFolder = models.ForeignKey('HomeFolder', related_name='hi')
+
+class Report(models.Model):
+	title = models.CharField(max_length=50)
+	shortDescription = models.TextField(max_length=160)
+	longDescription = models.TextField()
+	timeStamp = models.DateTimeField(auto_now=True)
+	files = models.ManyToManyField(File, blank=True)
+	private = models.BooleanField(default=True)
+	collaborators = models.ManyToManyField(User)
+	parentFolder = models.ForeignKey(HomeFolder)
