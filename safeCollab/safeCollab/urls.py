@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/', include('login.urls')),
     url(r'^private_messages/', include('private_messages.urls')),
+    url(r'^reports/', include('reports.urls')),
 ]
