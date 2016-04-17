@@ -31,20 +31,15 @@
   			<div class="searchbar">
 				Search: <input type="text" name="search" value="" />
 	  		</div>
-			<form id="new_conversation" method="post" action="/new_conversation/">
-				{% csrf_token %}
-				Participants: <input type="text" name="participants" value="" size="25" />
-				<p>Please separate participants by commas.</p>
-				Message: <input style="height:100px" type="text" name="mess" value="" size="25" />
-				<br /><br>
-				<input type="submit" name="new_conversation" value="New Conversation" />
-			</form>
+
+				
 	  		
 	  		<script>
 				function openNewConversation() {
 					window.open("/private_messages/new_conversation/");
 				}
 	  		</script>
+			<input type="button" value="New Conversation" onclick="openNewConversation()"/>
 			<ul class="nav nav-sidebar">
 				{% for conversation in conversations %}
 				<li class="contacts">
