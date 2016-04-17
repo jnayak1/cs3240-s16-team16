@@ -25,7 +25,11 @@ def home(request):
 @login_required
 def getReport(request, reportID):
 	report = Report.objects.get(id=reportID)
-	c = Context({'report': report})
+	path = [report]
+	while path[0].parentFolder != None:
+		path.insert(0,path[0].parentFolder)
+	path.pop()
+	c = Context({'report': report, 'path': path})
 	c = RequestContext(request, c)
 	return render(request, 'report.html', c)
 
