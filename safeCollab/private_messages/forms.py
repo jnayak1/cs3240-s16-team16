@@ -9,6 +9,8 @@ class SendMessage(forms.Form):
 		self.fields['content'].widget.attrs['cols'] = 90
 
 class ConversationForm(forms.Form):
-	class Meta:
-		model = ConversationLog
-		fields = ('participants', 'log')
+	participants = forms.CharField(widget=forms.Textarea)
+	log = forms.CharField(widget=forms.Textarea)
+	#class Meta:
+#		model = ConversationLog
+#		fields = ('participants', 'log')

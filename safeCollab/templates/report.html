@@ -50,17 +50,18 @@
   			{{report.longDescription}}
   		</div>
   	</div>
-    <form method='POST'>
+    <form method='POST' enctype="multipart/form-data">
+      {% csrf_token %}
     	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
     		<h4>Files:</h4>
     		<div class="add-delete">
     			<label>
-            <input type="radio"/>
-            <span type="radio" class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
+            <input type="radio" name="uploadDelete" value="upload"/>
+            <span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
             data-target="#uploadModal"></span>
           </label>
           <label>
-            <input type="radio"/>
+            <input type="radio" name="uploadDelete" value="delete"/>
             <span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
             data-target="#deleteFileModal"></span>
           </label>
@@ -70,7 +71,7 @@
     			<a>
     				<div class="media folder">
     					<div class="media-left">
-    						<input type="checkbox" aria-label="...">
+    						<input type="checkbox" name="checkedFiles" value="{{ file.id }}" aria-label="...">
     					</div>
     					<div class="media-body">
     						<span class="media-object glyphicon glyphicon-save-file"></span>
@@ -89,11 +90,16 @@
               <h4 class="modal-title" id="myModalLabel">Upload File</h4>
             </div>
             <div class="modal-body">
-              ...
+              <p>
+                Title:
+              {{formset.uploadFileForm.title}}
+              </p>
+              </br>
+              {{ formset.uploadFileForm.file }}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Upload</button>
+              <input type="submit" value="Upload" class="btn btn-primary">
             </div>
           </div>
         </div>
@@ -111,7 +117,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <input type="submit" value="Delete" class="btn btn-danger">
             </div>
           </div>
         </div>
@@ -122,12 +128,12 @@
     		<h4>Collaborators:</h4>
     		<div class="add-delete">
           <label>
-            <input type="radio"/>
+            <input type="radio" name="addDelete" value="add"/>
       			<span type="radio" class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
             data-target="#addCollabModal"></span>
           </label>
           <label>
-            <input type="radio"/>
+            <input type="radio" name="addDelete" value="delete"/>
       			<span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
             data-target="#removeCollabModal"></span>
           </label>

@@ -13,7 +13,7 @@ class File(models.Model):
 class Folder(models.Model):
 	owner = models.ForeignKey(User)
 	title = models.CharField(max_length=100)
-	parentFolder = models.ForeignKey('self', blank=True, null=True)	
+	parentFolder = models.ForeignKey('self', blank=True, null=True)
 
 class Report(models.Model):
 	title = models.CharField(max_length=50)

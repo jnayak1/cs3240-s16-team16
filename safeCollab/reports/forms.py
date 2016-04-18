@@ -1,8 +1,13 @@
 from django import forms
-from private_messages.models import ConversationLog
 
-class AddFile(forms.Form):
-	name = forms.CharField(max_length=100)
+class UploadFileForm(forms.Form):
+	title = forms.CharField(max_length=50)
+	file = forms.FileField()
+	CHOICES=[('upload','upload'),
+		('delete','delete')]
+	uploadDelete = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
 
-class RemoveFile(forms.Form):
-	pass
+class DeleteFileForm(forms.Form):
+	CHOICES=[('upload','upload'),
+		('delete','delete')]
+	uploadDelete = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
