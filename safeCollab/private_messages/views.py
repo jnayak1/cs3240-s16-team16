@@ -13,7 +13,11 @@ import re
 
 @login_required
 def index(request):
-	conversations = ConversationLog.objects.all()
+	allconversations = ConversationLog.objects.all()
+	conversations = []
+	for conversation in allconversations:
+		if request.user in conversation.participants.all():
+			conversations.append(conversation)
 	c = Context({'conversations': conversations})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
@@ -30,8 +34,15 @@ def index(request):
 	return render(request, 'private_messages.html', c)
 
 def getConversation(request, conversationID):
-	conversations = ConversationLog.objects.all()
+	allconversations = ConversationLog.objects.all()
+	conversations = []
+	for conversation in allconversations:
+		if request.user in conversation.participants.all():
+			conversations.append(conversation)
+	
 	active_conversation = ConversationLog.objects.get(pk=conversationID)
+	if request.user not in active_conversation.participants.all():
+		return HttpResponse("You are not authorized to access that location.")
 	c = Context({'conversations': conversations, 'active_conversation': active_conversation})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
