@@ -14,13 +14,19 @@ from reports.models import Folder, Report
 
 @login_required
 def home(request):
-	homeFolder = Folder.objects.filter(owner=request.user).filter(parentFolder=None)[0]
-	folders = Folder.objects.filter(owner=request.user).exclude(parentFolder=None)
-	reports = Report.objects.filter(collaborators=request.user, parentFolder=homeFolder)
-	path = [homeFolder]
-	c = Context({'folders': folders, 'reports': reports, 'path': path})
-	c = RequestContext(request, c)
-	return render(request, 'report_folder.html', c)
+	#Please fix. 
+	array = Folder.objects.filter(owner=request.user).filter(parentFolder=None)
+	
+	if len(array) > 0:
+		homeFolder = Folder.objects.filter(owner=request.user).filter(parentFolder=None)[0]
+		folders = Folder.objects.filter(owner=request.user).exclude(parentFolder=None)
+		reports = Report.objects.filter(collaborators=request.user, parentFolder=homeFolder)
+		path = [homeFolder]
+		c = Context({'folders': folders, 'reports': reports, 'path': path})
+		c = RequestContext(request, c)
+		return render(request, 'report_folder.html', c)
+	else:
+		return HttpResponse("There are no folders.")
 
 @login_required
 def getReport(request, reportID):
