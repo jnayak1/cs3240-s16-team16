@@ -24,3 +24,11 @@ class Report(models.Model):
 	private = models.BooleanField(default=True)
 	collaborators = models.ManyToManyField(User)
 	parentFolder = models.ForeignKey(Folder)
+	owner = models.ForeignKey(User, related_name="reporter")
+
+	@classmethod
+	def create(self, owner, title, parentFolder):
+		return self(owner=owner, title=title, parentFolder=parentFolder,
+			shortDescription="Write a short description",
+			longDescription="Write a longer description",
+			collaborators=owner)

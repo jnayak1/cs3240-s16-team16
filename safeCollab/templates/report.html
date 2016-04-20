@@ -37,19 +37,61 @@
   		<h1 class="col-md-offset-1">{{report.title}}<small></small></h1>
   	</div>
   	<div class="panel panel-default col-md-offset-1 col-md-10">
-  		<div class="panel-body">
+  		<div class="panel-body" data-toggle="modal" data-target="#summaryModal">
+        <span class="glyphicon glyphicon-edit"></span>
         <b>Summary:</b>
         </br>
   			{{report.shortDescription}}
   		</div>
   	</div>
-  	<div class="panel panel-default col-md-offset-1 col-md-10">
-  		<div class="panel-body">
-        <b>Description:</b>
-        </br>
-  			{{report.longDescription}}
-  		</div>
-  	</div>
+    <form method='POST'>
+      {% csrf_token %}
+      <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Summary</h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editSummaryForm.summary}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="panel panel-default col-md-offset-1 col-md-10">
+    		<div class="panel-body" data-toggle="modal" data-target="#descriptionModal">
+          <span class="glyphicon glyphicon-edit"></span>
+          <b>Description:</b>
+          </br>
+    			{{report.longDescription}}
+    		</div>
+    	</div>
+      <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Description</h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editDescriptionForm.description}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
     <form method='POST' enctype="multipart/form-data">
       {% csrf_token %}
     	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
@@ -117,13 +159,14 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <input type="submit" value="Delete" class="btn btn-danger">
+              <input type="submit" class="btn btn-danger">
             </div>
           </div>
         </div>
       </div>
     </form>
     <form method='POST'>
+      {% csrf_token %}
     	<div class="halfPanel panel panel-default col-md-5">
     		<h4>Collaborators:</h4>
     		<div class="add-delete">
@@ -143,7 +186,7 @@
     			<a>
     				<div class="media folder">
     					<div class="media-left">
-    						<input type="checkbox" aria-label="...">
+    						<input type="checkbox" name="checkedCollaborators" value="{{ person.id }}" aria-label="...">
     					</div>
     					<div class="media-body">
     						<span class="media-object glyphicon glyphicon-user"></span>
@@ -162,11 +205,12 @@
     					<h4 class="modal-title" id="myModalLabel">Add Collaborator</h4>
     				</div>
     				<div class="modal-body">
-    					...
+    					<p>Enter User's email address:</p>
+              {{ formset.addCollaboratorForm.email }}
     				</div>
     				<div class="modal-footer">
     					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    					<button type="button" class="btn btn-primary">Add</button>
+    					<input type="submit" value="Add" class="btn btn-primary">
     				</div>
     			</div>
     		</div>
@@ -183,7 +227,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger">Add</button>
+              <input type="submit" value="Remove" class="btn btn-danger">
             </div>
           </div>
         </div>
