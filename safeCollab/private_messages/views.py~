@@ -13,11 +13,7 @@ import re
 
 @login_required
 def index(request):
-	allconversations = ConversationLog.objects.all()
-	conversations = []
-	for conversation in allconversations:
-		if request.user in conversation.participants.all():
-			conversations.append(conversation)
+	conversations = ConversationLog.objects.all()
 	c = Context({'conversations': conversations})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
@@ -34,15 +30,8 @@ def index(request):
 	return render(request, 'private_messages.html', c)
 
 def getConversation(request, conversationID):
-	allconversations = ConversationLog.objects.all()
-	conversations = []
-	for conversation in allconversations:
-		if request.user in conversation.participants.all():
-			conversations.append(conversation)
-	
+	conversations = ConversationLog.objects.all()
 	active_conversation = ConversationLog.objects.get(pk=conversationID)
-	if request.user not in active_conversation.participants.all():
-		return HttpResponse("You are not authorized to access that location.")
 	c = Context({'conversations': conversations, 'active_conversation': active_conversation})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
@@ -77,7 +66,7 @@ def newConversation(request):
 			nonexistentusers = []
 			for x in pattern.split(participants):
 				if x:
-					if x in User.objects.all().values_list('username', flat=True):
+					if User.objects.get(username=x):
 						users.append(x)
 					else:
 						nonexistentusers.append(x)

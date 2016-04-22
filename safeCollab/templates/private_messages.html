@@ -29,14 +29,17 @@
   	<div class="container-fluid">
   		<div class="col-sm-3 col-md-2 sidebar">
   			<div class="searchbar">
-  				<input type="text" name="Search"></input>
+				Search: <input type="text" name="search" value="" />
 	  		</div>
-	  		<button onclick="openNewConversation()">New Conversation</button>
+
+				
+	  		
 	  		<script>
 				function openNewConversation() {
-					window.open("/private_messages/new_conversation");
+					window.open("/private_messages/new_conversation/");
 				}
 	  		</script>
+			<input type="button" value="New Conversation" onclick="openNewConversation()"/>
 			<ul class="nav nav-sidebar">
 				{% for conversation in conversations %}
 				<li class="contacts">
@@ -70,7 +73,7 @@
 		  		<form action="/private_messages/{{ active_conversation.id }}/" method="post">
     				{% csrf_token %}
     				{{ form }}
-    				<input type="submit" value="Submit" class="btn btn-success" />
+    				<input type="submit" name="messenger" value="Submit" class="btn btn-success" />
 				</form>
 		    </div>
     	</div>
