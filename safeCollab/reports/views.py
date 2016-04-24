@@ -17,8 +17,8 @@ from itertools import chain
 
 @login_required
 def home(request):
-	if request.user.is_authenticated():
-		return HttpResponse("You are not authorized to access that location.")
+	if not request.user.is_authenticated():
+		return HttpResponse(request.user.is_authenticated())
 	# redirect to get folder
 	try:
 		homeFolder = Folder.objects.filter(owner=request.user).filter(parentFolder=None)[0]
@@ -34,7 +34,7 @@ def home(request):
 
 @login_required
 def getReport(request, reportID):
-	if request.user.is_authenticated():
+	if not request.user.is_authenticated():
 		return HttpResponse("You are not authorized to access that location.")
 	formset = {}
 	report = Report.objects.get(id=reportID)
@@ -92,7 +92,7 @@ def getReport(request, reportID):
 
 @login_required
 def getFolder(request, folderID):
-	if request.user.is_authenticated():
+	if not request.user.is_authenticated():
 		return HttpResponse("You are not authorized to access that location.")
 	formset = {}
 	pwd = Folder.objects.get(id=folderID)
