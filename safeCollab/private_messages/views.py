@@ -100,7 +100,7 @@ def newConversation(request):
 					#return HttpResponse(p)
 					#conversation.participants.add(currentUser)
 				
-				
+				active_conversation.participants.add(User.objects.get(username=request.user))
 				message_sender = request.user
 				message = Message(sender=message_sender, content=log)
 				message.save()
