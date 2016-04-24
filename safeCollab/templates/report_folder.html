@@ -120,6 +120,7 @@
       	</div>
       </form>
       <form method='POST'>
+        {% csrf_token %}
       	<div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       		<div class="modal-dialog" role="document">
       			<div class="modal-content">
@@ -128,13 +129,14 @@
       					<h4 class="modal-title" id="myModalLabel">Move Items</h4>
       				</div>
       				<div class="modal-body">
+                <h5>Move selected items to:</h5>
       				  {% for folder in folders %}
-                <input type="radio" name="moveToFolder" value="folder.id">
+                <p><input type="radio" name="destinationFolder" value="{{folder.id}}"> {{folder.title}} </p>
                 {% endfor %}
       				</div>
       				<div class="modal-footer">
       					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      					<button type="button" class="btn btn-primary">Move</button>
+      					<input type="submit" value="Move" class="btn btn-primary">
       				</div>
       			</div>
       		</div>
