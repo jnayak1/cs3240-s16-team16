@@ -106,7 +106,16 @@ def getFolder(request, folderID):
 				pwd.save()
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-			
+			folderID = request.POST.get('destinationFolder')
+			destinationFolder = Folder.objects.get(id=folderID)
+			for item in request.POST.getlist('modifyFolder'):
+				folderToMove = Folder.objects.get(id=item)
+				folderToMove.parentFolder = destinationFolder
+				folderToMove.save()
+			for item in request.POST.getlist('modifyReport'):
+				reportToMove = Report.objects.get(id=item)
+				destinationFolder.reports.add(reportToMove)
+				destinationFolder.save()
 	else:
 		formset = {
 			'addFolderForm': AddFolderForm(),
