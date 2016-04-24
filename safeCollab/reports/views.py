@@ -102,20 +102,38 @@ def getFolder(request, folderID):
 			if formset['addFolderForm'].data['reportFolder'] == 'folder':
 				newFolder = Folder(owner=request.user, title=formset['addFolderForm'].data['name'],parentFolder=pwd)
 				newFolder.save()
+		
 		formset['addReportForm'] = AddReportForm(request.POST)
-		print(formset['addReportForm'].errors)
+		#print(formset['addReportForm'].errors)
 		if formset['addReportForm'].is_valid():
 			if formset['addReportForm'].data['reportFolder'] == 'report':
 				print("hello")
 				newReport = Report.objects.create(owner=request.user, title=formset['addReportForm'].data['title'],
 					parentFolder=pwd)
 				newReport.save()
+		formset['removeReportFolderForm'] = RemoveReportFolderForm(request.POST)
+		if formset['removeReportFolderForm'].is_valid():
+			#if formset['removeReportFolderForm'].data['reportFolder'] == 'report':
+			#print("hello")
+			for fdr in request.POST.getlist('selectedFolders'):
+				deletedFolder = Folder.objects.get(id=fdr)
+				deletedFolder.delete()
+				#report.collaborators.remove()
+				#deletedCollaborator = User.objects.get(id=collabObj) 
+				#report.collaborators.remove(deletedCollaborator)
+			for rpt in request.POST.getlist('selectedReports'):
+				deletedReport = Report.objects.get(id=rpt)
+				pwd.reports.remove(deletedReport)
+
 	else:
+		#HttpResponse("HEY!")
 		formset = {
 			'addFolderForm': AddFolderForm(),
 			'addReportForm': AddReportForm(),
 			'removeReportFolderForm': RemoveReportFolderForm()
 		}
+
+
 	folders = Folder.objects.filter(owner=request.user, parentFolder=pwd)
 	reports = Report.objects.filter(collaborators=request.user, parentFolder=pwd)
 	reports = list(chain(reports, Report.objects.filter(owner=request.user, parentFolder=pwd)))
