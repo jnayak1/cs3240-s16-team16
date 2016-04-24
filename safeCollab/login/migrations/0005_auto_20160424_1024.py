@@ -8,13 +8,13 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('private_messages', '0002_auto_20160411_1428'),
+        ('login', '0004_userprofile_groups'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='message',
-            name='sender',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            model_name='userprofile',
+            name='user',
+            field=models.OneToOneField(related_name='user', to=settings.AUTH_USER_MODEL),
         ),
     ]

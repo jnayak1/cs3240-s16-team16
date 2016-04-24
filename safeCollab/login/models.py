@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 # Create your models here.
 class Category(models.Model):
@@ -35,12 +35,15 @@ class Report(models.Model):
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name="user")
 
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
     #picture = models.ImageField(upload_to='profile_images', blank=True)
     user_type = models.CharField(max_length=16)
+    #Hold all of the groups the user belongs to
+    groups = models.ManyToManyField(Group, related_name="groups")
+
     # Override the __unicode__() method to return out something meaningful!
     def __str__(self):
         return self.user.username
