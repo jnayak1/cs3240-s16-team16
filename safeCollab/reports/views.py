@@ -9,7 +9,7 @@ from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from reports.models import Folder, Report, File
 from django.core.context_processors import csrf
-from reports.forms import UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm
+from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm 
 from django.utils.timezone import now
 from itertools import chain
 
@@ -93,6 +93,7 @@ def getFolder(request, folderID):
 			if formset['addFolderForm'].data['reportFolder'] == 'folder':
 				newFolder = Folder(owner=request.user, title=formset['addFolderForm'].data['name'],parentFolder=pwd)
 				newFolder.save()
+		
 		formset['addReportForm'] = AddReportForm(request.POST)
 		if formset['addReportForm'].is_valid():
 			if formset['addReportForm'].data['reportFolder'] == 'report':
@@ -104,24 +105,44 @@ def getFolder(request, folderID):
 				newReport.save()
 				pwd.reports.add(newReport)
 				pwd.save()
+		formset['removeReportFolderForm'] = RemoveReportFolderForm(request.POST)
+		if formset['removeReportFolderForm'].is_valid():
+			#if formset['removeReportFolderForm'].data['reportFolder'] == 'report':
+			print("hello")
+			print(request.POST.getlist('selectedFolders'))
+			for fdr in request.POST.getlist('selectedFolders'):
+				deletedFolder = Folder.objects.get(id=fdr)
+				print(deletedFolder.id)
+				deletedFolder.delete()
+				#report.collaborators.remove()
+				#deletedCollaborator = User.objects.get(id=collabObj) 
+				#report.collaborators.remove(deletedCollaborator)
+			for rpt in request.POST.getlist('selectedReports'):
+				deletedReport = Report.objects.get(id=rpt)
+				pwd.reports.remove(deletedReport)
+
+				
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-			folderID = request.POST.get('destinationFolder')
+			folderID = request.POST.get('selectedFolders')
 			destinationFolder = Folder.objects.get(id=folderID)
-			for item in request.POST.getlist('modifyFolder'):
+			for item in request.POST.getlist('selectedFolders'):
 				folderToMove = Folder.objects.get(id=item)
 				folderToMove.parentFolder = destinationFolder
 				folderToMove.save()
-			for item in request.POST.getlist('modifyReport'):
+			for item in request.POST.getlist('selectedReports'):
 				reportToMove = Report.objects.get(id=item)
 				destinationFolder.reports.add(reportToMove)
 				destinationFolder.save()
 	else:
+		#HttpResponse("HEY!")
 		formset = {
 			'addFolderForm': AddFolderForm(),
 			'addReportForm': AddReportForm(),
-			'moveForm': MoveForm()
-			}
+			'removeReportFolderForm': RemoveReportFolderForm(),
+			'moveForm':MoveForm()
+		}
+
 	folders = Folder.objects.filter(owner=request.user, parentFolder=pwd)
 	reports = pwd.reports.all
 	path = [pwd]

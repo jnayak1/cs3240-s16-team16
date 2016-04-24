@@ -46,7 +46,7 @@
     			<a href="/reports/folder/{{folder.id}}">
   	  			<div class="media folder">
   	  				<div class="media-left">
-  	  					<input type="checkbox" name="modifyFolder" value="folder.id" aria-label="...">
+  	  					<input type="checkbox" name="selectedFolders" value="{{folder.id}}" aria-label="...">
   	  				</div>
   	  				<div class="media-body">
   	  					<span class="media-object glyphicon glyphicon-folder-open"></span>
@@ -62,7 +62,7 @@
     			<a href="/reports/{{report.id}}">
   	  			<div class="media report">
   	  				<div class="media-left">
-  	  					<input type="checkbox" name="modifyReport" value="report.id" aria-label="...">
+  	  					<input type="checkbox" name="selectedReports" value="{{report.id}}" aria-label="...">
   	  				</div>
   	  				<div class="media-body">
   	  					<span class="media-object glyphicon glyphicon-file"></span>
@@ -88,7 +88,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <input type="submit" value="Delete" class="btn btn-danger">
             </div>
           </div>
         </div>

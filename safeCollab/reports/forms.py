@@ -41,7 +41,7 @@ class AddReportForm(forms.Form):
 	reportFolder = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
 	title = forms.CharField(max_length=50)
 
-class DeleteForm(forms.Form):
+class RemoveReportFolderForm(forms.Form):
 	pass
 
 class MoveForm(forms.Form):
