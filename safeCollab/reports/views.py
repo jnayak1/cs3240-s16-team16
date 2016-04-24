@@ -124,16 +124,17 @@ def getFolder(request, folderID):
 				
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-			folderID = request.POST.get('selectedFolders')
-			destinationFolder = Folder.objects.get(id=folderID)
-			for item in request.POST.getlist('selectedFolders'):
-				folderToMove = Folder.objects.get(id=item)
-				folderToMove.parentFolder = destinationFolder
-				folderToMove.save()
-			for item in request.POST.getlist('selectedReports'):
-				reportToMove = Report.objects.get(id=item)
-				destinationFolder.reports.add(reportToMove)
-				destinationFolder.save()
+			if False:
+				folderID = request.POST.get('selectedFolders')
+				destinationFolder = Folder.objects.get(id=folderID)
+				for item in request.POST.getlist('selectedFolders'):
+					folderToMove = Folder.objects.get(id=item)
+					folderToMove.parentFolder = destinationFolder
+					folderToMove.save()
+				for item in request.POST.getlist('selectedReports'):
+					reportToMove = Report.objects.get(id=item)
+					destinationFolder.reports.add(reportToMove)
+					destinationFolder.save()
 	else:
 		#HttpResponse("HEY!")
 		formset = {
