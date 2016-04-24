@@ -51,6 +51,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+safeCollab/db.sqlite3
 
 # Sphinx documentation
 docs/_build/
