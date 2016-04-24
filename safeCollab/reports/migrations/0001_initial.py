@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('auth', '0006_require_contenttypes_0002'),
     ]
 
     operations = [
@@ -40,10 +41,15 @@ class Migration(migrations.Migration):
                 ('longDescription', models.TextField()),
                 ('timeStamp', models.DateTimeField(auto_now=True)),
                 ('private', models.BooleanField(default=True)),
-                ('collaborators', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
+                ('collaborators', models.ManyToManyField(to=settings.AUTH_USER_MODEL, max_length=160)),
                 ('files', models.ManyToManyField(to='reports.File', blank=True)),
+                ('group', models.ForeignKey(related_name='group', to='auth.Group')),
                 ('owner', models.ForeignKey(related_name='reporter', to=settings.AUTH_USER_MODEL)),
-                ('parentFolder', models.ForeignKey(to='reports.Folder')),
             ],
+        ),
+        migrations.AddField(
+            model_name='folder',
+            name='reports',
+            field=models.ManyToManyField(to='reports.Report', blank=True),
         ),
     ]

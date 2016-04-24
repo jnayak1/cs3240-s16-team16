@@ -43,3 +43,8 @@ class AddReportForm(forms.Form):
 
 class RemoveReportFolderForm(forms.Form):
 	pass
+
+class MoveForm(forms.Form):
+	pass
+
+
