@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 # Create your models here.
@@ -22,7 +22,7 @@ class Report(models.Model):
 	timeStamp = models.DateTimeField(auto_now=True)
 	files = models.ManyToManyField(File, blank=True)
 	private = models.BooleanField(default=True)
-	collaborators = models.ManyToManyField(User)
+	group = models.ForeignKey(Group, related_name='group')
 	parentFolder = models.ForeignKey(Folder)
 	owner = models.ForeignKey(User, related_name="reporter")
 
@@ -32,3 +32,6 @@ class Report(models.Model):
 			shortDescription="Write a short description",
 			longDescription="Write a longer description",
 			collaborators=owner)
+
+	def __str__(self):
+		return self.title + str(self.group)

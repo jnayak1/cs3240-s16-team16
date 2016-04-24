@@ -58,10 +58,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'upload'
+    'upload',
     'login',
     'private_messages',
     'reports',
+    'external'
 )
 
 PASSWORD_HASHERS = (
