@@ -31,7 +31,8 @@ def getReport(request, reportID):
 	report = Report.objects.get(id=reportID)
 	reportGroup = report.group
 
-	if (not(request.user.groups.filter(name=reportGroup.name).exists())):
+	# if user is not in the group for the report and report is private, direct to home folder
+	if (not(request.user.groups.filter(id=reportGroup.id).exists()) && report.private == True):
 		return HttpResponseRedirect('/reports/')
 
 	if request.method == "POST":
