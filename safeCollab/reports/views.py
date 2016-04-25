@@ -30,6 +30,10 @@ def getReport(request, reportID):
 	formset = {}
 	report = Report.objects.get(id=reportID)
 	reportGroup = report.group
+
+	if (not(request.user.groups.filter(name=reportGroup.name).exists())):
+		return HttpResponseRedirect('/reports/')
+
 	if request.method == "POST":
 		formset['editSummaryForm'] = EditSummaryForm(request.POST)
 		if formset['editSummaryForm'].is_valid():
@@ -86,6 +90,11 @@ def getReport(request, reportID):
 def getFolder(request, folderID):
 	formset = {}
 	pwd = Folder.objects.get(id=folderID)
+
+	# if user does not own folder, redirect to home folder
+	if (pwd.owner != request.user):
+		return HttpResponseRedirect('/reports/')
+
 	if request.method == "POST":
 		formset['addFolderForm'] = AddFolderForm(request.POST)
 		if formset['addFolderForm'].is_valid():
