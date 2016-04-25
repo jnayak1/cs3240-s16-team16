@@ -73,11 +73,10 @@ def getReport(request, reportID):
 			'deleteFileForm': DeleteFileForm(),
 			'addCollaboratorForm' : AddCollaboratorForm(), 
 			'deleteCollaboratorForm' : DeleteCollaboratorForm()}
-	# path = [Folder.objects.filter(reports)]
-	# while path[0].parentFolder != None:
-	# 	path.insert(0,path[0].parentFolder)
-	# path.pop()
-	path = []
+	# This gives that path. It currently is not working since we changed models.py.
+	path = [Folder.objects.filter(reports__id=report.id, owner=request.user)[0]]
+	while path[0].parentFolder != None:
+		path.insert(0,path[0].parentFolder)
 	collaboratingUsers = reportGroup.user_set.all()
 	c = Context({'report': report, 'path': path, 'formset' : formset, "collaboratingUsers": collaboratingUsers})
 	c = RequestContext(request, c)
@@ -107,26 +106,22 @@ def getFolder(request, folderID):
 				pwd.save()
 		formset['removeReportFolderForm'] = RemoveReportFolderForm(request.POST)
 		if formset['removeReportFolderForm'].is_valid():
-			#if formset['removeReportFolderForm'].data['reportFolder'] == 'report':
-			print("hello")
-			print(request.POST.getlist('selectedFolders'))
-			for fdr in request.POST.getlist('selectedFolders'):
-				deletedFolder = Folder.objects.get(id=fdr)
-				print(deletedFolder.id)
-				deletedFolder.delete()
-				#report.collaborators.remove()
-				#deletedCollaborator = User.objects.get(id=collabObj) 
-				#report.collaborators.remove(deletedCollaborator)
-			for rpt in request.POST.getlist('selectedReports'):
-				deletedReport = Report.objects.get(id=rpt)
-				pwd.reports.remove(deletedReport)
+			if request.POST.get('deleteButton') == "Delete":
+				print("deleted")
+				for fdr in request.POST.getlist('selectedFolders'):
+					deletedFolder = Folder.objects.get(id=fdr)
+					deletedFolder.delete()
+				for rpt in request.POST.getlist('selectedReports'):
+					deletedReport = Report.objects.get(id=rpt)
+					pwd.reports.remove(deletedReport)
 
 				
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-			if False:
-				folderID = request.POST.get('selectedFolders')
-				destinationFolder = Folder.objects.get(id=folderID)
+			if request.POST.get('moveButton') == "Move":
+				destinationFolderID = request.POST.get('destinationFolder')
+				destinationFolder = Folder.objects.get(id=destinationFolderID)
+				print(request.POST.getlist('selectedReports'))
 				for item in request.POST.getlist('selectedFolders'):
 					folderToMove = Folder.objects.get(id=item)
 					folderToMove.parentFolder = destinationFolder
@@ -135,8 +130,9 @@ def getFolder(request, folderID):
 					reportToMove = Report.objects.get(id=item)
 					destinationFolder.reports.add(reportToMove)
 					destinationFolder.save()
+					pwd.reports.remove(reportToMove)
+					pwd.save()
 	else:
-		#HttpResponse("HEY!")
 		formset = {
 			'addFolderForm': AddFolderForm(),
 			'addReportForm': AddReportForm(),

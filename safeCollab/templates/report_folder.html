@@ -31,10 +31,11 @@
         {% for folder in path %}
 			 <li><a href="/reports/folder/{{folder.id}}">{{ folder.title }}</a></li>
         {% endfor %}
-        <li><a href="/login/" class="active">{{ pwd.title }}</a></li>
+        <li class="active">{{ pwd.title }}</li>
 		  </ol>
   	</div>
     <form method='POST'>
+      {% csrf_token %}
     	<div class="contents col-md-offset-1 col-md-10">
     		<div class="new_report col-md-offset-1 col-md-3">
     			<span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" data-target="#addModal"></span>
@@ -88,60 +89,58 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <input type="submit" value="Delete" class="btn btn-danger">
+              <input type="submit" name="deleteButton" value="Delete" class="btn btn-danger">
             </div>
           </div>
         </div>
       </div>
-      <form method='POST'>
-        {% csrf_token %}
-      	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      		<div class="modal-dialog" role="document">
-      			<div class="modal-content">
-      				<div class="modal-header">
-      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      					<h4 class="modal-title" id="myModalLabel">Add Folder or Report</h4>
-      				</div>
-      				<div class="modal-body">
-                Folder: <input type="radio" name="reportFolder" value="folder">
-                Report: <input type="radio" name="reportFolder" value="report">
-                <p>Folder Name: <p>
-                {{formset.addFolderForm.name}}
-                </br>
-                <p>Report Name: <p>
-                {{formset.addReportForm.title}}
-      				</div>
-      				<div class="modal-footer">
-      					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      					<input type="submit" value="Add" class="btn btn-primary">
-      				</div>
-      			</div>
-      		</div>
-      	</div>
-      </form>
-      <form method='POST'>
-        {% csrf_token %}
-      	<div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      		<div class="modal-dialog" role="document">
-      			<div class="modal-content">
-      				<div class="modal-header">
-      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      					<h4 class="modal-title" id="myModalLabel">Move Items</h4>
-      				</div>
-      				<div class="modal-body">
-                <h5>Move selected items to:</h5>
-      				  {% for folder in folders %}
-                <p><input type="radio" name="destinationFolder" value="{{folder.id}}"> {{folder.title}} </p>
-                {% endfor %}
-      				</div>
-      				<div class="modal-footer">
-      					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      					<input type="submit" value="Move" class="btn btn-primary">
-      				</div>
-      			</div>
-      		</div>
-      	</div>
-      </form>
+      <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Move Items</h4>
+            </div>
+            <div class="modal-body">
+              <h5>Move selected items to:</h5>
+              {% for folder in folders %}
+              <p><input type="radio" name="destinationFolder" value="{{folder.id}}"> {{folder.title}} </p>
+              {% endfor %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Move" name="moveButton" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    		<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    					<h4 class="modal-title" id="myModalLabel">Add Folder or Report</h4>
+    				</div>
+    				<div class="modal-body">
+              Folder: <input type="radio" name="reportFolder" value="folder">
+              Report: <input type="radio" name="reportFolder" value="report">
+              <p>Folder Name: <p>
+              {{formset.addFolderForm.name}}
+              </br>
+              <p>Report Name: <p>
+              {{formset.addReportForm.title}}
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    					<input type="submit" value="Add" class="btn btn-primary">
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </form>
 <style type="text/css">
 body{
 	background-color: #5bc0de;
@@ -151,6 +150,9 @@ body{
 	border-radius: 5px;
 	min-height: 400px;
 	padding-top: 10px;
+}
+.folders{
+  padding-top: 10px;
 }
 .folder{
 	padding-top: 10px;
@@ -164,6 +166,7 @@ body{
 	padding-left: 10px;
 	border-radius: 5px;
 	background-color: #f5f5f5;
+  margin-bottom: 10px; 
 }
 
 </style>
