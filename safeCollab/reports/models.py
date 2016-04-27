@@ -23,8 +23,6 @@ class Report(models.Model):
 	timeStamp = models.DateTimeField(auto_now=True)
 	files = models.ManyToManyField(File, blank=True)
 	private = models.BooleanField(default=True)
-# 	group = models.ForeignKey(Group, related_name='group', null = True)
-# 	parentFolder = models.ForeignKey(Folder)
 	group = models.ForeignKey(Group, related_name='group')
 	owner = models.ForeignKey(User, related_name="reporter")
 	collaborators = models.ManyToManyField(User, max_length=160)
