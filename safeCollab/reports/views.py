@@ -84,7 +84,7 @@ def getReport(request, reportID):
 	return render(request, 'report.html', c)
 
 @login_required
-def getFolder(request, folderID):
+def getFolder(request, folderID) :
 	formset = {}
 	pwd = Folder.objects.get(id=folderID)
 	if request.method == "POST":
@@ -125,7 +125,11 @@ def getFolder(request, folderID):
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
 			folderID = request.POST.get('selectedFolders')
-			destinationFolder = Folder.objects.get(id=folderID)
+			try:
+				destinationFolder = Folder.objects.get(id=folderID)
+			except Exception as e:
+				return render(request, 'report_folder.html', c)
+
 			for item in request.POST.getlist('selectedFolders'):
 				folderToMove = Folder.objects.get(id=item)
 				folderToMove.parentFolder = destinationFolder
