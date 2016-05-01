@@ -68,8 +68,11 @@ def getReport(request, reportID):
 		formset['addCollaboratorForm'] = AddCollaboratorForm(request.POST)
 		if formset['addCollaboratorForm'].is_valid():
 			if(formset['addCollaboratorForm'].data['addDelete'] == 'add'):
-				addedUser = User.objects.get(email=formset['addCollaboratorForm'].data['email'])
-				addedUser.groups.add(reportGroup)
+				try:
+					addedUser = User.objects.get(email=formset['addCollaboratorForm'].data['email'])
+					addedUser.groups.add(reportGroup)
+				except User.DoesNotExist:
+					return HttpResponseRedirect('/reports/' + str(reportID))
 		formset['deleteCollaboratorForm'] = DeleteCollaboratorForm(request.POST)
 		if formset['deleteCollaboratorForm'].is_valid():
 			if(formset['deleteCollaboratorForm'].data['addDelete'] == 'delete'):
@@ -165,34 +168,24 @@ def getFolder(request, folderID) :
 				
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-			folderID = request.POST.get('selectedFolders')
-			try:
-				destinationFolder = Folder.objects.get(id=folderID)
-			except Exception as e:
-				#return render(request, 'report_folder.html', c)
-				print("Exception!")
-			for item in request.POST.getlist('selectedFolders'):
-				folderToMove = Folder.objects.get(id=item)
-				folderToMove.parentFolder = destinationFolder
-				folderToMove.save()
-			for item in request.POST.getlist('selectedReports'):
-				reportToMove = Report.objects.get(id=item)
-				destinationFolder.reports.add(reportToMove)
-				destinationFolder.save()
 			if request.POST.get('moveButton') == "Move":
-				destinationFolderID = request.POST.get('destinationFolder')
-				destinationFolder = Folder.objects.get(id=destinationFolderID)
-				print(request.POST.getlist('selectedReports'))
-				for item in request.POST.getlist('selectedFolders'):
-					folderToMove = Folder.objects.get(id=item)
-					folderToMove.parentFolder = destinationFolder
-					folderToMove.save()
-				for item in request.POST.getlist('selectedReports'):
-					reportToMove = Report.objects.get(id=item)
-					destinationFolder.reports.add(reportToMove)
-					destinationFolder.save()
-					pwd.reports.remove(reportToMove)
-					pwd.save()
+				try:
+					destinationFolderID = request.POST.get('destinationFolder')
+					destinationFolder = Folder.objects.get(id=destinationFolderID)
+
+					for item in request.POST.getlist('selectedFolders'):
+						folderToMove = Folder.objects.get(id=item)
+						folderToMove.parentFolder = destinationFolder
+						folderToMove.save()
+					for item in request.POST.getlist('selectedReports'):
+						reportToMove = Report.objects.get(id=item)
+						destinationFolder.reports.add(reportToMove)
+						destinationFolder.save()
+					for item in request.POST.getlist('selectedReports'):
+						pwd.reports.remove(Report.objects.get(id=item))
+				except Exception:
+					print("exception")
+					HttpResponseRedirect('/reports/folder' + str(folderID))
 	else:
 		formset = {
 			'addFolderForm': AddFolderForm(),
