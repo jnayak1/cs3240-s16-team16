@@ -143,17 +143,26 @@ def getFolder(request, folderID) :
 		formset['addReportForm'] = AddReportForm(request.POST)
 		if formset['addReportForm'].is_valid():
 			if formset['addReportForm'].data['reportFolder'] == 'report':
-				collaboratingGroup = Group.objects.create(name=formset['addReportForm'].data['title'])
-				collaboratingGroup.save()
-				request.user.groups.add(collaboratingGroup)
-				# title must be unique
+				# group must exist 
+				if not Group.objects.filter(name=formset['addReportForm'].data['reportGroup']):
+					return HttpResponseRedirect('/reports/folder/' + str(folderID))
+
+				collaboratingGroup = Group.objects.get(name=formset['addReportForm'].data['reportGroup'])
+
+				# owner must be a part of group
+				if not request.user.groups.filter(name=collaboratingGroup.name).exists():
+					return HttpResponseRedirect('/reports/folder/' + str(folderID))
+
+				# report title must be unique
 				if Report.objects.filter(title=formset['addReportForm'].data['title']):
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
+				print("adding report")
 				newReport = Report.objects.create(owner=request.user, title=formset['addReportForm'].data['title'],
 					group=collaboratingGroup)
 				newReport.save()
 				pwd.reports.add(newReport)
 				pwd.save()
+				
 		formset['removeReportFolderForm'] = RemoveReportFolderForm(request.POST)
 		if formset['removeReportFolderForm'].is_valid():
 			if request.POST.get('deleteButton') == "Delete":
