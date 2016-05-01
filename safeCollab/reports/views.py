@@ -31,7 +31,10 @@ def getReport(request, reportID):
 		return HttpResponseRedirect('/reports/')
 
 	formset = {}
-	report = Report.objects.get(id=reportID)
+	try:
+		report = Report.objects.get(id=reportID)
+	except:
+		print("Exception!")
 	reportGroup = report.group
 
 	# if user is not in the group for the report and report is private, direct to home folder
@@ -119,6 +122,7 @@ def getFolder(request, folderID):
 	if not Folder.objects.filter(id=folderID).exists():
 		return HttpResponseRedirect('/reports/')
 
+def getFolder(request, folderID) :
 	formset = {}
 	pwd = Folder.objects.get(id=folderID)
 
@@ -161,6 +165,20 @@ def getFolder(request, folderID):
 				
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
+			folderID = request.POST.get('selectedFolders')
+			try:
+				destinationFolder = Folder.objects.get(id=folderID)
+			except Exception as e:
+				#return render(request, 'report_folder.html', c)
+				print("Exception!")
+			for item in request.POST.getlist('selectedFolders'):
+				folderToMove = Folder.objects.get(id=item)
+				folderToMove.parentFolder = destinationFolder
+				folderToMove.save()
+			for item in request.POST.getlist('selectedReports'):
+				reportToMove = Report.objects.get(id=item)
+				destinationFolder.reports.add(reportToMove)
+				destinationFolder.save()
 			if request.POST.get('moveButton') == "Move":
 				destinationFolderID = request.POST.get('destinationFolder')
 				destinationFolder = Folder.objects.get(id=destinationFolderID)
