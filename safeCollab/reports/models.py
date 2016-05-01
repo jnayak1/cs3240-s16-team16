@@ -7,7 +7,7 @@ from django.contrib.auth.models import User, Group
 class File(models.Model):
 	title = models.CharField(max_length=50)
 	publisher = models.ForeignKey(User)
-	timeStamp = models.DateTimeField(auto_now=True)
+	timeStamp = models.DateTimeField(auto_now_add=True)
 	content = models.FileField(upload_to='files')
 
 class Folder(models.Model):
