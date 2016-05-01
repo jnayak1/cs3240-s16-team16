@@ -26,6 +26,14 @@
       <![endif]-->
   </head>
   <body>
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Danger!</strong> {{message}}
+      </div>
+      {% endfor %}
+    {% endif %}
   	<div class="path col-md-12">
   		<ol class="breadcrumb">
         {% for folder in path %}
@@ -33,7 +41,7 @@
         {% endfor %}
         <li class="active">{{ pwd.title }}</li>
 		  </ol>
-  	</div>
+  	</div>  
     <form method='POST'>
       {% csrf_token %}
     	<div class="contents col-md-offset-1 col-md-10">

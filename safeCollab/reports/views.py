@@ -12,6 +12,7 @@ from django.core.context_processors import csrf
 from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm 
 from django.utils.timezone import now
 from itertools import chain
+from django.contrib import messages
 
 # Create your views here.
 
@@ -28,17 +29,18 @@ def home(request):
 @login_required
 def getReport(request, reportID):
 	if not Report.objects.filter(id=reportID).exists():
+		messages.error(request, 'Report does not exist.')
 		return HttpResponseRedirect('/reports/')
 
+	# report exists so there shouldn't be any exceptions
+	report = Report.objects.get(id=reportID)
+
 	formset = {}
-	try:
-		report = Report.objects.get(id=reportID)
-	except:
-		print("Exception!")
 	reportGroup = report.group
 
 	# if user is not in the group for the report and report is private, direct to home folder
 	if (not(request.user.groups.filter(id=reportGroup.id).exists()) and report.private == True):
+		messages.error(request,"You do not have access to the requested report.")
 		return HttpResponseRedirect('/reports/')
 
 	if request.method == "POST":
@@ -72,6 +74,7 @@ def getReport(request, reportID):
 					addedUser = User.objects.get(email=formset['addCollaboratorForm'].data['email'])
 					addedUser.groups.add(reportGroup)
 				except User.DoesNotExist:
+					messages.error(request, "The user does not exist.")
 					return HttpResponseRedirect('/reports/' + str(reportID))
 		formset['deleteCollaboratorForm'] = DeleteCollaboratorForm(request.POST)
 		if formset['deleteCollaboratorForm'].is_valid():
@@ -109,6 +112,8 @@ def togglePrivate(request, reportID):
 	if request.user == report.owner:
 		report.private = not report.private
 		report.save()
+	else:
+		messages.error(request, "You are not the owner of the report so you cannot change privacy.")
 	return HttpResponseRedirect('/reports/' + reportID)
 
 @login_required
@@ -117,20 +122,22 @@ def deleteReport(request, reportID):
 	parentFolder = Folder.objects.get(reports__id=reportID)
 	if request.user == report.owner:
 		report.delete()
+	else:
+		messages.error("You are not the owner of the report so you cannot delete the")
 	return HttpResponseRedirect('/reports/folder/' + str(parentFolder.id))
 
 @login_required
 def getFolder(request, folderID):
 	# redirect to home folder if folder does not exist
 	if not Folder.objects.filter(id=folderID).exists():
+		messages.error(request, "Requested folder does not exist.")
 		return HttpResponseRedirect('/reports/')
-
-def getFolder(request, folderID) :
 	formset = {}
 	pwd = Folder.objects.get(id=folderID)
 
 	# if user does not own folder, redirect to home folder
 	if (pwd.owner != request.user):
+		messages.error(request, "You do not have access to the requested folder.")
 		return HttpResponseRedirect('/reports/')
 
 	if request.method == "POST":
@@ -145,16 +152,19 @@ def getFolder(request, folderID) :
 			if formset['addReportForm'].data['reportFolder'] == 'report':
 				# group must exist 
 				if not Group.objects.filter(name=formset['addReportForm'].data['reportGroup']):
+					messages.error("Group does not exist.")
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
 
 				collaboratingGroup = Group.objects.get(name=formset['addReportForm'].data['reportGroup'])
 
 				# owner must be a part of group
 				if not request.user.groups.filter(name=collaboratingGroup.name).exists():
+					messages.error(request, "You cannot create a report with a group you are not a part of.")
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
 
 				# report title must be unique
 				if Report.objects.filter(title=formset['addReportForm'].data['title']):
+					messages.error(request, "There is already a report named" + formset['addReportForm'].data['title'])
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
 				print("adding report")
 				newReport = Report.objects.create(owner=request.user, title=formset['addReportForm'].data['title'],
@@ -193,7 +203,7 @@ def getFolder(request, folderID) :
 					for item in request.POST.getlist('selectedReports'):
 						pwd.reports.remove(Report.objects.get(id=item))
 				except Exception:
-					print("exception")
+					messages.error(request, "Invalid move operation.")
 					HttpResponseRedirect('/reports/folder' + str(folderID))
 	else:
 		formset = {
