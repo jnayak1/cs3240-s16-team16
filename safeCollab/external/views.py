@@ -67,6 +67,7 @@ def logout(request, userkey):
 def getReports(request, username, userkey):
 
     retVal = {}
+    groups = Group.objects.none()
 
     for profile in UserProfile.objects.all():
         user = profile.user
