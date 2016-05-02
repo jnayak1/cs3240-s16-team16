@@ -57,16 +57,13 @@ def getReport(request, reportID):
 		if formset['editKeyWords'].is_valid():
 			report.keywords = formset['editKeyWords'].data['keywords']
 			report.save()
-
 		formset['uploadFileForm'] = UploadFileForm(request.POST, request.FILES)
 		if formset['uploadFileForm'].is_valid():
 			if(formset['uploadFileForm'].data['uploadDelete'] == 'upload'):
-				newFile = File(content=request.FILES['file'], title=formset['uploadFileForm'].data['title'],
-					publisher=request.user, timeStamp=now())
-				newFile.save()
-				instance = Report.objects.get(id=reportID)
-				instance.files.add(newFile)
-				instance.save()
+				for item in request.POST.getlist('filesToAdd'):
+					fileToAdd = File.objects.get(id=item)
+					report.files.add(fileToAdd)
+					report.save()
 		formset['deleteFileForm'] = DeleteFileForm(request.POST)
 		if formset['deleteFileForm'].is_valid():
 			if(formset['deleteFileForm'].data['uploadDelete'] == 'delete'):
@@ -108,8 +105,11 @@ def getReport(request, reportID):
 	collaboratingUsers = reportGroup.user_set.all()
 	owner = request.user == report.owner
 	private = report.private
+	usersFiles = File.objects.filter(publisher=request.user)
+	print(usersFiles)
 	c = Context({'report': report, 'path': path, 'formset' : formset, 
-		"collaboratingUsers": collaboratingUsers, 'owner': owner, 'private': private})
+		"collaboratingUsers": collaboratingUsers, 'owner': owner, 'private': private,
+		"usersFiles": usersFiles})
 	c = RequestContext(request, c)
 	return render(request, 'report.html', c)
 
