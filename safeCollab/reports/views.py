@@ -282,30 +282,45 @@ def search(request):
 		reportWithMatchingTags = []
 		reportWithMatchingSummary = []
 		reportWithMatchingDescription = []
+
+		appeared = []
 		allreports = Report.objects.all()
 		search_terms = request.POST['searchKey']
 		pattern = re.compile("\\s+")
 		keywords = pattern.split(search_terms)
 		
 		for keyword in keywords:
+			boolean = False
 			if keyword in allreports.values_list('title', flat=True):
 				report = Report.objects.get(title=keyword)
 				reportWithSearchTitle.append(report)
+				appeared.append(keyword)
+				boolean = True
+			
 			for report in allreports:
 				title = Report.objects.get(title=report.title)
 				tags = pattern.split(report.keywords)
 				for tag in tags:
-					if keyword == tag:
+					if (keyword == tag) and (keyword not in appeared) and not boolean:
 						reportWithMatchingTags.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 				summary = pattern.split(report.shortDescription)
 				for summ in summary:
-					if (keyword == summ) and (title not in reportWithMatchingSummary):
+					if (keyword == summ) and (keyword not in appeared) and not boolean:
 						reportWithMatchingSummary.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 						#return HttpResponse(keyword)
 				descriptions = pattern.split(report.longDescription)
 				for description in descriptions:
-					if (keyword == description) and (title not in reportWithMatchingSummary):
+					if (keyword == description) and (keyword not in appeared) and not boolean:
 						reportWithMatchingDescription.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 	context = {
 		'reportWithSearchTitle' : reportWithSearchTitle,
 		'reportWithMatchingTags' : reportWithMatchingTags,
