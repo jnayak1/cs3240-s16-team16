@@ -29,12 +29,15 @@ class Report(models.Model):
 	private = models.BooleanField(default=True)
 	group = models.ForeignKey(Group, related_name='group')
 	owner = models.ForeignKey(User, related_name="reporter")
+	collaborators = models.ManyToManyField(User, max_length=160)
+	keywords = models.TextField(max_length=500, default="")
 
 	@classmethod
 	def create(self, owner, title, parentFolder, group):
 		return self(owner=owner, title=title, parentFolder=parentFolder,
 			shortDescription="Write a short description",
 			longDescription="Write a longer description",
+			keywords="here, is, an, example",
 			group=group)
 
 	def __str__(self):

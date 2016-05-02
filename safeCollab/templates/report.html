@@ -172,6 +172,36 @@
         </div>
       </div>
     </form>
+
+  <form method='POST'>
+      {% csrf_token %}
+      <div class="panel panel-default col-md-offset-1 col-md-10">
+        <div class="panel-body" data-toggle="modal" data-target="#keywordModal">
+          <span class="glyphicon glyphicon-edit"></span>
+          <b>Keywords:</b>
+          </br>
+          {{report.keywords}}
+        </div>
+      </div>
+      <div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Keywords (Please separate by spaces): </h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editKeyWords.keywords}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
     <form method='POST' enctype="multipart/form-data">
       {% csrf_token %}
     	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">

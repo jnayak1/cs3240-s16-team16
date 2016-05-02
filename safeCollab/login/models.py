@@ -15,6 +15,19 @@ class Category(models.Model):
     def __str__(self):  #For Python 2, use __str__ on Python 3
         return self.name
 
+class Groupings(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    #name = models.ForeignKey(Group)
+    members = models.ManyToManyField(User)
+    def __str__(self):
+        return (self.name, ", ".join(User.name for user in self.User.all()))
+
+class SiteManager(models.Model):
+    name = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.name
+
 class Page(models.Model):
     category = models.ForeignKey(Category)
     title = models.CharField(max_length=128)

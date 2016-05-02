@@ -1,0 +1,30 @@
+<html>
+
+    <body>
+        {% if done %}
+        <p>Site Manager successfully added! Return <a href="/login/">Home</a></p>
+        {% else %}
+        <h1>Add Site Manager</h1>
+
+        <form id="staff_form" method="post" action="/login/add_staffManager/">
+            {% csrf_token %}
+            {{ staff_form.as_p }}
+
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Add" />
+
+        </form>
+        {% endif %}
+    </body>
+
+</html>
