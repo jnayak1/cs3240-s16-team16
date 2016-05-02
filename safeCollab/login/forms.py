@@ -1,6 +1,6 @@
 from django import forms
-from login.models import Page, Category, UserProfile
-from django.contrib.auth.models import User
+from login.models import Page, Category, UserProfile, Groupings, SiteManager
+from django.contrib.auth.models import User, Group
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the category name.")
@@ -13,6 +13,25 @@ class CategoryForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = Category
         fields = ('name',)
+
+class SiteManagerForm(forms.ModelForm):
+    #name = forms.CharField(max_length=128, help_text="Please choose a user.")
+    class Meta:
+        model = SiteManager
+        fields = ('name',)
+
+class GroupingsForm(forms.ModelForm):
+    members = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple())
+    class Meta:
+        model = Groupings
+        fields = ('name', 'members')
+
+class MyGroupingsForm(forms.ModelForm):
+    mygroups = forms.ModelMultipleChoiceField(queryset=Group.objects.all())
+    members = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple())
+    class Meta:
+        model = Groupings
+        fields = ('members', 'mygroups')
 
 
 class PageForm(forms.ModelForm):

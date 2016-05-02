@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>safeCollab </title>
+
+    </head>
+
+    <body>
+        {% if user.is_authenticated %}
+        {% if groups %}
+        <h1>{{ groups.name }}</h1>
+            {% if pages %}
+            <ul>
+                {% for page in pages %}
+                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No reports currently in group.</strong>
+            {% endif %}
+            <br><br><input id="uploadButton" type="button" value="Upload File"/><input id ="addGMem" type="button" value="Add User"/>
+        {% else %}
+            The specified group {{ group_name }} does not exist!
+        {% endif %}
+        <br><br><br>
+        <strong>Members</strong>
+  
+            <ul>
+                {% for groupmember in groupmembers %}
+                <li>{{ groupmember.uname }}</li>
+                {% endfor %}
+            </ul>
+        {%  else %}
+            You are not logged in!
+        {% endif %}
+    </body>
+    </body>
+</html>
+
+<script type="text/javascript">
+    document.getElementById("uploadButton").onclick = function () {
+        location.href = "/login/category/{{category_name}}/add_page/";
+    };
+    document.getElementById("addGMem").onclick = function () {
+        location.href = "/login/group/{{  groups.id }}/add_member/";
+    };
+</script>

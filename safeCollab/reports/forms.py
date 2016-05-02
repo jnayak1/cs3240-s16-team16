@@ -29,6 +29,12 @@ class EditSummaryForm(forms.Form):
 class EditDescriptionForm(forms.Form):
 	description = forms.CharField(widget=forms.Textarea)
 
+class EditKeyWords(forms.Form):
+	keywords = forms.CharField(widget=forms.Textarea)
+
+class SearchForm(forms.Form):
+	search = forms.CharField(widget=forms.Textarea)
+
 class AddFolderForm(forms.Form):
 	CHOICES=[('report','report'),
 		('folder','folder')]
@@ -46,5 +52,3 @@ class RemoveReportFolderForm(forms.Form):
 
 class MoveForm(forms.Form):
 	pass
-
-

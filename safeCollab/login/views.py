@@ -4,19 +4,176 @@ from login.models import Category
 from django.shortcuts import render
 from login.models import Page
 from login.forms import CategoryForm
-from login.forms import PageForm, UserForm, UserProfileForm
+from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group, User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 def index(request):
     # Request the context of the request.
-    category_list = Category.objects.all()
-    context_dict = {'categories': category_list}
+    group_list = request.user.groups.all()
+    context_dict = {'groups': group_list}
 
     # Render the response and send it back!
     return render(request, 'login/index.html', context_dict)
+@login_required
+def sample_add_member(request, group_id):
+    group=Group.objects.get(pk=group_id)
+    context_dict = {'groups': group}
+    #return HttpResponse(group.name)
+    return render(request, 'login/group.html', context_dict)
+
+@login_required
+def siteManager(request):
+    done = False
+    if request.method == 'POST':
+        siteManager_form = SiteManagerForm(data = request.POST)
+        if(siteManager_form.is_valid()):
+            sitemanager = siteManager_form.save()
+            sitemanager.save()
+            staff = User.objects.filter(is_staff=True)
+            staffNum = staff.count()
+            if staffNum < 3:
+                uname = siteManager_form.cleaned_data['name']
+                user = User.objects.get(username=uname)
+                user.is_staff = True
+                user.save()
+                groups = Group.objects.all()
+                for grp in groups:
+                    user.groups.add(grp)
+                done = True
+            else:
+                done = False
+                return HttpResponse("Cannot add site manager! More than three site managers already! <a href='/login/'>Return Home</a>")
+        else:
+            print (siteManager_form.errors)
+    else:
+        siteManager_form = SiteManagerForm()
+    return render(request,
+            'login/add_staffManager.html',
+            {'staff_form': siteManager_form, 'done': done} )
+
+
+
+@login_required
+def mygroups(request):
+# Sending user object to the form, to verify which fields to display/remove (depending on group)
+    done = False
+    if request.method == 'POST':
+        mygroupings_form = MyGroupingsForm(data=request.POST) ####NEW!
+# FIXME: edit the save database code stuffs. it doesn't actually add anyone to the groups.
+# find oput how to display what groups you are in, not all the groups.
+        # If the two forms are valid...
+        if mygroupings_form.is_valid():# and group_form.is_valid():
+            try:
+                mygroupings = mygroupings_form.save()
+                mygroupings.save()
+                gobject = Group()
+                gobject.name = mygroupings.name
+                gobject.save()
+               #groupings.members = members
+            except IntegrityError as ex:
+                return HttpResponse("Return back to previous page! <a href='/login/groups'></a>")
+
+            request.user.groups.add(gobject)
+#            for usr in groupings.members:
+#            print (groupings.members)
+            mems = mygroupings_form.cleaned_data['members']
+
+# permission to identify group
+
+# need to see what groups I am in, and be able to add others to any of those groups.
+
+            staff = User.objects.filter(is_staff=True)
+            for stf in staff:
+                stf.groups.add(gobject)
+            #gobject.user_set.add(the user)
+            for usr in mems:
+                usr.groups.add(gobject)
+
+           # print (user.groups.all())
+           # print (user.get_group_permissions(obj=None))
+           # print (user.groups.filter(name='Reporter').exists())
+            # Now sort out the UserProfile instance.
+            # Since we need to set the user attribute ourselves, we set commit=False.
+            # This delays saving the model until we're ready to avoid integrity problems.
+            done = True
+
+        else:
+            print (mygroupings_form.errors)
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        mygroupings_form = MyGroupingsForm()
+
+    # Render the template depending on the context.
+    return render(request,
+            'login/mygroups.html',
+            {'mygroupings_form': mygroupings_form, 'done': done} )
+
+
+@login_required
+def groups(request):
+    done = False
+    if request.method == 'POST':
+        groupings_form = GroupingsForm(data=request.POST) ####NEW!
+
+        # If the two forms are valid...
+        if groupings_form.is_valid():# and group_form.is_valid():
+            try:
+                groupings = groupings_form.save()
+                groupings.save()
+                gobject = Group()
+                gobject.name = groupings.name
+                gobject.save()
+               #groupings.members = members
+            except IntegrityError as ex:
+                return HttpResponse("Return to previous page, there was a problem <a href='/login/groups'></a>")
+
+            request.user.groups.add(gobject)
+#            for usr in groupings.members:
+#            print (groupings.members)
+            mems = groupings_form.cleaned_data['members']
+
+# permission to identify group
+
+# need to see what groups I am in, and be able to add others to any of those groups.
+
+
+            #gobject.user_set.add(the user)
+
+            staff = User.objects.filter(is_staff=True)
+            for stf in staff:
+                stf.groups.add(gobject)
+
+                
+            for usr in mems:
+                usr.groups.add(gobject)
+
+           # print (user.groups.all())
+           # print (user.get_group_permissions(obj=None))
+           # print (user.groups.filter(name='Reporter').exists())
+            # Now sort out the UserProfile instance.
+            # Since we need to set the user attribute ourselves, we set commit=False.
+            # This delays saving the model until we're ready to avoid integrity problems.
+            done = True
+
+        else:
+            print (groupings_form.errors)
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        groupings_form = GroupingsForm()
+
+    # Render the template depending on the context.
+    return render(request,
+            'login/groups.html',
+            {'groupings_form': groupings_form, 'done': done} )
+
 
 @login_required
 def restricted(request):

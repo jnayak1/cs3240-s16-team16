@@ -38,10 +38,13 @@
 
 	<link rel="stylesheet" type="text/css" href="../static/horizontal.css">
         <li><a href="/login/restricted/">Restricted Page</a><br /></li>
-        <li><a href="/login/add_category/">Add a New Category</a><br /></li>
-        <li><a href="/login/add_page/">Add a New Page</a><br /></li>
+        <!--<li><a href="/login/add_category/">Add a New Category</a><br /></li>-->
+        <li><a href="/login/groups/">Make Group</a><br /></li>
         <li><a href="/reports">Reports</a><br /></li>
         <li><a href="/private_messages/">Messages</a><br/></li>
+        {% if user.is_staff %}
+        <li><a href="/login/add_staffManager/">Add a Site Manager</a><br/><li>
+        {% endif %}
         <li><a href="/login/logout/">Logout</a><br /></li>
 
 	
@@ -52,6 +55,26 @@
         <h1>Hello {{ user.username }}, welcome to safeCollab!</h1>
         {% else %}
         <h1>Hello, welcome to safeCollab!</h1>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        {% if groups %}
+        <h1>Groups</h1>
+            <ul>
+                {% for group in groups %} <!--for group in groups-->
+                <li><a href="./group/{{ group.id }}">{{ group.name }}</a></li>
+                {% endfor %}
+            </ul>
+       {% else %}
+            <strong>You are not currently in any groups.</strong>
+       {% endif %}
+        <!--<a href="/login/restricted/">Restricted Page</a><br />
+        <a href="/login/add_category/">Add a New Group</a><br />
+        <a href="/login/add_page/">Add a New Page</a><br />
+        <a href="/login/logout/">Logout</a><br />-->
+        {% else %}
+        <!--<center><a href="/login/login_page/">Login</a><br />
+        <a href="/login/register/">Register Here</a><br /></center>-->
         {% endif %}
 
         <!--<b>Please Login:</b>
