@@ -1,5 +1,5 @@
 from django import forms
-from login.models import Page, Category, UserProfile, Groupings, SiteManager
+from login.models import Page, Category, UserProfile, Groupings, SiteManager, ActivateUser, DeactivateUser, DeleteUser
 from django.contrib.auth.models import User, Group
 
 class CategoryForm(forms.ModelForm):
@@ -32,6 +32,26 @@ class MyGroupingsForm(forms.ModelForm):
     class Meta:
         model = Groupings
         fields = ('members', 'mygroups')
+
+class ActivateUserForm(forms.ModelForm):
+    username = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_active=False), widget=forms.CheckboxSelectMultiple())
+    class Meta:
+        model = ActivateUser
+        fields = {'username',}
+
+class DeactivateUserForm(forms.ModelForm):
+    username = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_active=True), widget=forms.CheckboxSelectMultiple())
+    class Meta:
+        model = DeactivateUser
+        fields = {'username',}
+
+class DeleteUserForm(forms.ModelForm):
+    username = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple())
+    class Meta:
+        model = DeleteUser
+        fields = {'username',}
+   
+
 
 
 class PageForm(forms.ModelForm):

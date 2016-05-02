@@ -307,7 +307,7 @@ def search(request):
 				title = Report.objects.get(title=report.title)
 				tags = pattern.split(report.keywords)
 				for tag in tags:
-					if (keyword == tag) and (keyword not in appeared) and not boolean:
+					if (keyword == tag) and (tag not in appeared) and (keyword not in appeared) and not boolean:
 						reportWithMatchingTags.append(title)
 						appeared.append(keyword)
 						boolean = True

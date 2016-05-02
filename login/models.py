@@ -15,6 +15,27 @@ class Category(models.Model):
     def __str__(self):  #For Python 2, use __str__ on Python 3
         return self.name
 
+class ActivateUser(models.Model):
+    username = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.username
+
+class DeactivateUser(models.Model):
+    username = models.CharField(max_length = 50)
+
+    def __str__(self):
+        return self.username
+
+class DeleteUser(models.Model):
+    username = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.username
+
+
+
+
 class Groupings(models.Model):
     name = models.CharField(max_length=50, unique=True)
     #name = models.ForeignKey(Group)

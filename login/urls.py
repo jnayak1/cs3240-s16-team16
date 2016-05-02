@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^groups/$', views.groups, name='groups'),
     url(r'^mygroups/$', views.mygroups, name='mygroups'),
-
+    url(r'^manage/$', views.manage, name='manage'),
+    url(r'^delete_users/$', views.deleteUser, name='delete'),
+    url(r'^activate/$', views.activate, name='activate'),
+    url(r'^deactivate/$', views.deactivate, name='deactivate'),
     url(r'^login_page/$', views.user_login, name='login_page'),  # New!
 	)
