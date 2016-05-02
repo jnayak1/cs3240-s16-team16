@@ -126,7 +126,7 @@ def newConversation(request):
 				
 				active_conversation.participants.add(User.objects.get(username=request.user))
 				message_sender = request.user
-				message = Message(sender=message_sender, content=log)
+				message = Message(sender=message_sender, content=bytes(log, "UTF-8"))
 				message.save()
 				active_conversation.log.add(message)
 				active_conversation.save()
