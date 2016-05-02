@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>New Conversation</title>
+		<script type="text/javascript">
+			function closeWindow() {
+				document.forms['new_conversation'].submit();		
+				 //window.close();
+			}
+		</script>
+	</head>
+	<body>
+		<h1>New Conversation</h1>
+		<form id="new_conversation" method="post" action="">
+			{% csrf_token %}
+			Participants: <input type="text" name="participants" value="" size="50" />
+			<p>Please separate participants by commas.</p>
+			<br /><br>
+			Message: <input style="height:200px" type="text" name="message" value="" size="50" />
+			<br /><br>
+			<input type="submit" value="Send" /><!--onclick="closeWindow();"/> -->
+		</form>
+	</body>
+</html>
