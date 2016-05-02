@@ -12,12 +12,9 @@ from django.core.context_processors import csrf
 from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm, SearchForm, EditKeyWords
 from django.utils.timezone import now
 from itertools import chain
-<<<<<<< HEAD
 import re
-=======
 from django.contrib import messages
 
->>>>>>> 881a89ff058c429cd69fbb86812c0eee3a627a6d
 # Create your views here.
 
 @login_required
@@ -200,7 +197,6 @@ def getFolder(request, folderID):
 			report.save()
 		formset['moveForm'] = MoveForm(request.POST)
 		if formset['moveForm'].is_valid():
-<<<<<<< HEAD
 #<<<<<<< HEAD
 			folderID = request.POST.get('selectedFolders')
 			try:
@@ -221,8 +217,6 @@ def getFolder(request, folderID):
 					print("Exception! Adding to destination folder!")
 				
 #=======
-=======
->>>>>>> 881a89ff058c429cd69fbb86812c0eee3a627a6d
 			if request.POST.get('moveButton') == "Move":
 				try:
 					destinationFolderID = request.POST.get('destinationFolder')
@@ -260,7 +254,6 @@ def getFolder(request, folderID):
 	c['formset'] = formset
 	return render(request, 'report_folder.html', c)
 
-<<<<<<< HEAD
 @login_required
 def search(request, searchID):
 	reportWithSearchTitle = []
@@ -322,7 +315,3 @@ def search(request):
 		}
 				
 	return render(request, 'report_search.html', context)
-=======
-
-
->>>>>>> 881a89ff058c429cd69fbb86812c0eee3a627a6d
