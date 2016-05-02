@@ -12,6 +12,8 @@ from django.core.context_processors import csrf
 from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm, SearchForm, EditKeyWords
 from django.utils.timezone import now
 from itertools import chain
+from login.models import UserProfile
+from django.db.models import Q
 import re
 from django.contrib import messages
 
@@ -276,41 +278,60 @@ def search(request, searchID):
 	return render(request, 'report_search.html', {})
 
 def search(request):
-	
 	if request.method == 'POST':
 		reportWithSearchTitle = []
 		reportWithMatchingTags = []
 		reportWithMatchingSummary = []
 		reportWithMatchingDescription = []
-		allreports = Report.objects.all()
+
+		groups = request.user.groups.all()
+
+		allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
+	    #allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
+		appeared = []
+		reports = Report.objects.all()
+		#allreports = Report.objects.filter(user=request.user)
 		search_terms = request.POST['searchKey']
 		pattern = re.compile("\\s+")
 		keywords = pattern.split(search_terms)
 		
 		for keyword in keywords:
+			boolean = False
 			if keyword in allreports.values_list('title', flat=True):
 				report = Report.objects.get(title=keyword)
 				reportWithSearchTitle.append(report)
+				appeared.append(keyword)
+				boolean = True
+			
 			for report in allreports:
 				title = Report.objects.get(title=report.title)
 				tags = pattern.split(report.keywords)
 				for tag in tags:
-					if keyword == tag:
+					if (keyword == tag) and (keyword not in appeared) and not boolean:
 						reportWithMatchingTags.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 				summary = pattern.split(report.shortDescription)
 				for summ in summary:
-					if (keyword == summ) and (title not in reportWithMatchingSummary):
+					if (keyword == summ) and (keyword not in appeared) and not boolean:
 						reportWithMatchingSummary.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 						#return HttpResponse(keyword)
 				descriptions = pattern.split(report.longDescription)
 				for description in descriptions:
-					if (keyword == description) and (title not in reportWithMatchingSummary):
+					if (keyword == description) and (keyword not in appeared) and not boolean:
 						reportWithMatchingDescription.append(title)
+						appeared.append(keyword)
+						boolean = True
+						break
 	context = {
 		'reportWithSearchTitle' : reportWithSearchTitle,
 		'reportWithMatchingTags' : reportWithMatchingTags,
 		'reportWithMatchingSummary' : reportWithMatchingSummary,
 		'reportWithMatchingDescription' : reportWithMatchingDescription
-		}
-				
-	return render(request, 'report_search.html', context)
+		}				
+	return render(request, 'report_search.html', context)	
+
