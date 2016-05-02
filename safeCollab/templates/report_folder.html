@@ -41,16 +41,13 @@
         {% endfor %}
         <li class="active">{{ pwd.title }}</li>
 		  </ol>
-<<<<<<< HEAD
   	</div>
        <form id="new_search" action="/reports/search/" method='POST' >
              {% csrf_token %}
              <input type="text" name="searchKey" value="" size="50" />
              <input type="submit" value="Search" /><!--onclick="closeWindow();"/> -->
-            </form>
-=======
+      </form>
   	</div>  
->>>>>>> 881a89ff058c429cd69fbb86812c0eee3a627a6d
     <form method='POST'>
       {% csrf_token %}
     	<div class="contents col-md-offset-1 col-md-10">

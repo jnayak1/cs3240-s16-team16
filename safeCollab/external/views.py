@@ -11,7 +11,6 @@ from django.db.models import Q
 import json
 import string
 import random
-
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3
