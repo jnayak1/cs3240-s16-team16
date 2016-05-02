@@ -151,7 +151,7 @@ def getFolder(request, folderID):
 		if formset['addReportForm'].is_valid():
 			if formset['addReportForm'].data['reportFolder'] == 'report':
 				# group must exist 
-				if not Group.objects.filter(name=formset['addReportForm'].data['reportGroup']):
+				if not Group.objects.filter(name=formset['addReportForm'].data['reportGroup']).exists():
 					messages.error("Group does not exist.")
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
 

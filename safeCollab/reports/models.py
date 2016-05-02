@@ -29,7 +29,6 @@ class Report(models.Model):
 	private = models.BooleanField(default=True)
 	group = models.ForeignKey(Group, related_name='group')
 	owner = models.ForeignKey(User, related_name="reporter")
-	collaborators = models.ManyToManyField(User, max_length=160)
 
 	@classmethod
 	def create(self, owner, title, parentFolder, group):

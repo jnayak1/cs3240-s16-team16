@@ -2,6 +2,7 @@ from django import forms
 from private_messages.models import ConversationLog
 class SendMessage(forms.Form):
 	content = forms.CharField(widget=forms.Textarea)
+	encrypted = forms.BooleanField(required=False)
 
 	def __init__(self, *args, **kwargs):
 		super(SendMessage, self).__init__(*args, **kwargs)

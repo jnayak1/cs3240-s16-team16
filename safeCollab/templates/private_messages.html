@@ -28,12 +28,6 @@
   <body>
   	<div class="container-fluid">
   		<div class="col-sm-3 col-md-2 sidebar">
-  			<div class="searchbar">
-				Search: <input type="text" name="search" value="" />
-	  		</div>
-
-				
-	  		
 	  		<script>
 				function openNewConversation() {
 					window.open("/private_messages/new_conversation/");
@@ -44,21 +38,35 @@
 				{% for conversation in conversations %}
 				<li class="contacts">
 					<div class="contact">
-						<a href="/private_messages/{{conversation.id}}/" id="{{conversation.0}}_link">{{conversation.participants.all}}
+						<a href="/private_messages/{{conversation.id}}/deleteConversation">
+							<span class="glyphicon glyphicon-trash"></span>
+						</a>
+						<a href="/private_messages/{{conversation.id}}/" id="{{conversation.0}}_link">
+						{% for person in conversation.participants.all%}
+							{% ifnotequal person request.user %}
+							{{person.get_username}}	
+							{% endifnotequal %}
+						{% endfor %}
 						</a>
 					</div>
 				</li>
 				{% endfor %}
 			</ul>
   		</div>
-  		<div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 main" id="messagefeed">
+  		<div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 main " id="messagefeed">
   			<div class="row-fluid">
 	  			<div class="conversation" id="{{conversation.0}}_content">
 		  			{% for message in active_conversation.log.all %}
 	  				<div class="message">
 	  					<span class="sender">
-	  						<img src="https://cdn0.iconfinder.com/data/icons/medical-tab-bar-ios-and-wp8-icons/40/Patient.png"></img>
-	  						{{message.sender}} :
+	  						<span class="glyphicon glyphicon-user"></span>
+	  						
+	  						{{message.sender}}: 
+	  						{% if  message.encrypted %}
+	  							<span class="glyphicon glyphicon-lock"></span>
+	  						{% else %}
+	  							<span class="glyphicon glyphicon-globe"></span>
+	  						{% endif %}
 	  					</span>
 	  					<span class="message-contents">
 	  						{{message.content}}
@@ -72,18 +80,40 @@
 	  		<div class"input_text_area  row-fluid">
 		  		<form action="/private_messages/{{ active_conversation.id }}/" method="post">
     				{% csrf_token %}
-    				{{ form }}
+    				{{ form.content }}
+    				{% if form %}
     				<input type="submit" name="messenger" value="Submit" class="btn btn-success" />
+    				{% endif %}
+    				</br>
+    				{{form.encrypted.label}}
+    				{{ form.encrypted }}    				
 				</form>
 		    </div>
     	</div>
   	</div>
 <style type="text/css">
 
+.bluecolor{
+	background-color: #5bc0de;
+}
+.conversation{
+	border-radius: 10px;
+}
+textarea{
+	border-radius: 10px;
+}
+
+span.glyphicon-user {
+    font-size: 3em;
+    padding-left: 5px;
+}
+
 .searchbar{
 	padding-bottom: 20px;
 }
 .contact{
+	padding-left: 50px;
+	padding-top: 10px;
 	padding-bottom: 50px;
 }
 .message{
@@ -102,7 +132,7 @@
 	overflow: auto;
 	padding-top: 30px;
 	height: 500px;
-	background-color: #D9DDDE;
+	background-color: #f5f5f5;
 }
 
 /*
@@ -120,6 +150,7 @@
  /* Hide for mobile, show later */
  .sidebar {
  	display: none;
+
  }
  @media (min-width: 768px) {
  	.sidebar {
@@ -135,6 +166,7 @@
  		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
  		background-color: #f5f5f5;
  		border-right: 1px solid #eee;
+ 		border-radius: 8px;
  	}
  }
 

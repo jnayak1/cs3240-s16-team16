@@ -5,4 +5,5 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^new_conversation/$', views.newConversation),
     url(r'^(?P<conversationID>\w{0,50})/$', views.getConversation),
+    url(r'^(?P<conversationID>\w{0,50})/deleteConversation$', views.deleteConversation)
 	)
