@@ -276,15 +276,19 @@ def search(request, searchID):
 	return render(request, 'report_search.html', {})
 
 def search(request):
-	
 	if request.method == 'POST':
 		reportWithSearchTitle = []
 		reportWithMatchingTags = []
 		reportWithMatchingSummary = []
 		reportWithMatchingDescription = []
 
+		groups = request.user.groups.all()
+
+		allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
+	    #allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
 		appeared = []
-		allreports = Report.objects.all()
+		reports = Report.objects.all()
+		#allreports = Report.objects.filter(user=request.user)
 		search_terms = request.POST['searchKey']
 		pattern = re.compile("\\s+")
 		keywords = pattern.split(search_terms)
@@ -326,6 +330,6 @@ def search(request):
 		'reportWithMatchingTags' : reportWithMatchingTags,
 		'reportWithMatchingSummary' : reportWithMatchingSummary,
 		'reportWithMatchingDescription' : reportWithMatchingDescription
-		}
-				
-	return render(request, 'report_search.html', context)
+		}				
+	return render(request, 'report_search.html', context)	
+
