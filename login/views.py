@@ -4,7 +4,7 @@ from login.models import Category
 from django.shortcuts import render
 from login.models import Page
 from login.forms import CategoryForm
-from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm
+from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm, DeleteUserForm, ActivateUserForm, DeactivateUserForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group, User
 from django.http import HttpResponseRedirect, HttpResponse
@@ -32,6 +32,70 @@ def sample_add_member(request, group_id):
     context_dict = {'groups': group}
     #return HttpResponse(group.name)
     return render(request, 'login/group.html', context_dict)
+
+@login_required
+def manage(request):
+    users = User.objects.all()
+    context_dict = {'users': users}
+    return render(request, 'login/manage.html', context_dict)
+
+@login_required
+def deleteUser(request):
+    done = False
+    if request.method == 'POST':
+        deleteForm = DeleteUserForm(data=request.POST)
+        if(deleteForm.is_valid()):
+            deleteuser = deleteForm.save()
+            deleteuser.save()
+            users = deleteForm.cleaned_data['username']
+            for usr in users:
+                usr.delete()
+            done = True
+        else:
+            print(deleteForm.errors)
+    else:
+        deleteForm = DeleteUserForm()
+    return render(request, 'login/delete_users.html', {'delete_form': deleteForm, 'done': done})
+
+@login_required
+def activate(request):
+    done = False
+    if request.method == 'POST':
+        activateForm = ActivateUserForm(data=request.POST)
+        if(activateForm.is_valid()):
+            activateuser = activateForm.save()
+            activateuser.save()
+            users = activateForm.cleaned_data['username']
+            for usr in users:
+                usr.is_active = True
+                usr.save()
+            done = True
+        else:
+            print(activateForm.errors)
+    else:
+        activateForm = ActivateUserForm()
+    return render(request, 'login/activate.html', {'activate_form': activateForm, 'done':done})
+
+@login_required
+def deactivate(request):
+    done = False
+    if request.method == 'POST':
+        deactivateForm = DeactivateUserForm(data=request.POST)
+        if(deactivateForm.is_valid()):
+            deactivateuser = deactivateForm.save()
+            deactivateuser.save()
+            users = deactivateForm.cleaned_data['username']
+            for usr in users:
+                usr.is_active = False
+                usr.save()
+            done = True
+        else:
+            print(deactivateForm.errors)
+    else:
+        deactivateForm = DeactivateUserForm()
+    return render(request, 'login/deactivate.html', {'deactivate_form': deactivateForm, 'done':done})
+
+
 
 @login_required
 def siteManager(request):
@@ -62,6 +126,7 @@ def siteManager(request):
     return render(request,
             'login/add_staffManager.html',
             {'staff_form': siteManager_form, 'done': done} )
+
 
 
 

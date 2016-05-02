@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>safeCollab</title>
+
+    {% if done %}
+        <p>User(s) successfully deleted! Return <a href="/login/">Home</a></p>
+        {% else %}
+        <h1>Delete Users</h1>
+
+        <form id="delete_form" method="post" action="/login/delete_users/">
+            {% csrf_token %}
+            {{ delete_form.as_p }}
+
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Delete" />
+
+        </form>
+        {% endif %}
+
+</head>
+<body>
+
+</body>
+</html>
