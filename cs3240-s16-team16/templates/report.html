@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>{{report.title}}</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Danger!</strong> {{message}}
+      </div>
+      {% endfor %}
+    {% endif %}
+
+  	<div class="path col-md-12">
+      <ol class="breadcrumb">
+        {% for folder in path %}
+       <li><a href="/reports/folder/{{folder.id}}">{{ folder.title }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+
+  	<div class="title page-header col-md-offset-1 col-md-10">
+  		<h1>
+        {{report.title}}
+        {% if private and owner %}
+          <small>
+            <a data-toggle="modal" data-target="#publicPrivateModal" class="glyphicon glyphicon-lock"></a>
+            <a data-toggle="modal" data-target="#deleteReportModal" class="glyphicon glyphicon-trash"></a>
+          </small>
+        {% elif owner %}
+          <small>
+            <a data-toggle="modal" data-target="#publicPrivateModal" class="glyphicon glyphicon-globe"></a>
+            <a data-toggle="modal" data-target="#deleteReportModal" class="glyphicon glyphicon-trash"></a>
+          </small>
+        {% elif private %}
+          <small>
+            <span class="glyphicon glyphicon-lock"></span>
+          </small>
+        {% else %}
+          <small><a class="glyphicon glyphicon-globe"></a></small>
+        {% endif %}
+        <span class="pull-right">
+          <small> UTC: {{report.timeStamp}}</small>
+        </span>
+      </h1>
+  	</div>
+   <div class="modal fade" id="publicPrivateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+              {% if owner and private %}
+                Make report public
+              {% else %}
+                Make report private 
+              {% endif %}
+            </h4>
+          </div>
+          <div class="modal-body">
+            {% if private %}
+              Are you sure you would like to make this report public?
+            {% else %}
+              Are you sure you would like to make this report private?
+            {% endif %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            <a href="/reports/{{report.id}}/togglePrivate" value="Yes" class="btn btn-danger">Yes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="deleteReportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+              {% if owner  %}
+                Delete Report
+              {% endif %}
+            </h4>
+          </div>
+          <div class="modal-body">
+              Are you sure you would like to delete this report?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            <a href="/reports/{{report.id}}/deleteReport" value="Yes" class="btn btn-danger">Yes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  	<div class="panel panel-default col-md-offset-1 col-md-10">
+  		<div class="panel-body" data-toggle="modal" data-target="#summaryModal">
+        <span class="glyphicon glyphicon-edit"></span>
+        <b>Short Description:</b>
+        </br>
+  			{{report.shortDescription}}
+  		</div>
+  	</div>
+    <form method='POST'>
+      {% csrf_token %}
+      <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Short Description</h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editSummaryForm.summary}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="panel panel-default col-md-offset-1 col-md-10">
+    		<div class="panel-body" data-toggle="modal" data-target="#descriptionModal">
+          <span class="glyphicon glyphicon-edit"></span>
+          <b>Long Description:</b>
+          </br>
+    			{{report.longDescription}}
+    		</div>
+    	</div>
+      <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Long Description</h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editDescriptionForm.description}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  <form method='POST'>
+      {% csrf_token %}
+      <div class="panel panel-default col-md-offset-1 col-md-10">
+        <div class="panel-body" data-toggle="modal" data-target="#keywordModal">
+          <span class="glyphicon glyphicon-edit"></span>
+          <b>Keywords:</b>
+          </br>
+          {{report.keywords}}
+        </div>
+      </div>
+      <div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Keywords (Please separate by spaces): </h4>
+            </div>
+            <div class="modal-body">
+              {{formset.editKeyWords.keywords}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form method='POST' enctype="multipart/form-data">
+      {% csrf_token %}
+    	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
+    		<h4>Files:</h4>
+    		<div class="add-delete">
+    			<label>
+            <input type="radio" name="uploadDelete" value="upload"/>
+            <span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
+            data-target="#uploadModal"></span>
+          </label>
+          <label>
+            <input type="radio" name="uploadDelete" value="delete"/>
+            <span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
+            data-target="#deleteFileModal"></span>
+          </label>
+    		</div>
+    		<div class="halfPanelContents col-md-11">
+    		  {% for file in report.files.all %}
+    			<a>
+    				<div class="media folder">
+    					<div class="media-left">
+    						<input type="checkbox" name="checkedFiles" value="{{ file.id }}" aria-label="...">
+    					</div>
+    					<div class="media-body">
+    						<span class="media-object glyphicon glyphicon-save-file"></span>
+    						<h4 class="media-heading">{{file.title}}</h4>
+    					</div>
+    				</div>
+    			</a>
+          {% endfor %}
+    		</div>
+    	</div>
+      <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Upload File</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                Title:
+              {{formset.uploadFileForm.title}}
+              </p>
+              </br>
+              {{ formset.uploadFileForm.file }}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Upload" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" 
+      aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete File</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you would like to delete the selected files?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-danger">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="halfPanel panel panel-default col-md-5">
+    		<h4>Collaborators:</h4>
+    		<div class="add-delete">
+          <label>
+            <input type="radio" name="addDelete" value="add"/>
+      			<span type="radio" class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" 
+            data-target="#addCollabModal"></span>
+          </label>
+          <label>
+            <input type="radio" name="addDelete" value="delete"/>
+      			<span type="radio" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" 
+            data-target="#removeCollabModal"></span>
+          </label>
+    		</div>
+    		<div class="halfPanelContents col-md-11">
+    			{% for person in collaboratingUsers %}
+    			<a>
+    				<div class="media folder">
+    					<div class="media-left">
+    						<input type="checkbox" name="checkedCollaborators" value="{{ person.id }}" aria-label="...">
+    					</div>
+    					<div class="media-body">
+    						<span class="media-object glyphicon glyphicon-user"></span>
+    						<h4 class="media-heading">{{person}}</h4>
+    					</div>
+    				</div>
+    			</a>
+    			{% endfor %}
+    		</div>
+    	</div>
+    	<div class="modal fade" id="addCollabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    		<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    					<h4 class="modal-title" id="myModalLabel">Add Collaborator</h4>
+    				</div>
+    				<div class="modal-body">
+    					<p>Enter User's email address:</p>
+              {{ formset.addCollaboratorForm.email }}
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    					<input type="submit" value="Add" class="btn btn-primary">
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+      <div class="modal fade" id="removeCollabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Remove Collaborator</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you would like to remove the selected collaborators?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Remove" class="btn btn-danger">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  	<style type="text/css">
+/*    http://stackoverflow.com/questions/17541614/use-image-instead-of-radio-button
+*/  label > input{ /* HIDE RADIO */
+      visibility: hidden; /* Makes input not-clickable */
+      position: absolute; /* Remove input from document flow */
+    }
+    label > input + span{ /* IMAGE STYLES */
+      cursor:pointer;
+      border:2px solid transparent;
+    }
+    label > input:checked + span{ /* (RADIO CHECKED) IMAGE STYLES */
+      border:2px solid #f00;
+    }
+    body{
+  		background-color: white;
+  	}
+    .title{
+      padding-top: 10px;
+    }
+  	.backbutton{
+  		background-color: #f5f5f5;
+  	}
+  	.halfPanel{
+  		padding-top: 10px;
+  		background-color: #f5f5f5;
+  		border-radius: 5px;
+  		padding-bottom: 10px;
+  	}
+    .halfPanelContents{
+      padding-top: 10px;
+    }
+  	.panel{
+  		background-color: #f5f5f5;
+  	}
+  	</style>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+</body>
+</html>
+<!-- <div> class="conversations">
+	
+</div> -->

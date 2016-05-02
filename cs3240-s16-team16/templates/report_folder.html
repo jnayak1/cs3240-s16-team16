@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>safeCollab</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+
+	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Danger!</strong> {{message}}
+      </div>
+      {% endfor %}
+    {% endif %}
+  	<div class="path col-md-12">
+  		<ol class="breadcrumb">
+        {% for folder in path %}
+			 <li><a href="/reports/folder/{{folder.id}}">{{ folder.title }}</a></li>
+        {% endfor %}
+        <li class="active">{{ pwd.title }}</li>
+		  </ol>
+  	</div>
+       <form id="new_search" action="/reports/search/" method='POST' >
+             {% csrf_token %}
+             <input type="text" name="searchKey" value="" size="50" />
+             <input type="submit" value="Search" /><!--onclick="closeWindow();"/> -->
+      </form>
+  	</div>  
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="contents col-md-offset-1 col-md-10">
+    		<div class="new_report col-md-offset-1 col-md-3">
+    			<span class="glyphicon glyphicon-plus btn btn-success" data-toggle="modal" data-target="#addModal"></span>
+    			<span class="glyphicon glyphicon-minus btn btn-danger" data-toggle="modal" data-target="#deleteModal"></span>
+    			<span class="btn btn-default" data-toggle="modal" data-target="#moveModal">Move</span>
+          
+    		</div>
+
+    		<div class="folders col-md-offset-1 col-md-10">
+    			{% for folder in folders %}
+    			<a href="/reports/folder/{{folder.id}}">
+  	  			<div class="media folder">
+  	  				<div class="media-left">
+  	  					<input type="checkbox" name="selectedFolders" value="{{folder.id}}" aria-label="...">
+  	  				</div>
+  	  				<div class="media-body">
+  	  					<span class="media-object glyphicon glyphicon-folder-open"></span>
+  	  					<h4 class="media-heading">{{folder.title}}</h4>
+  	  				</div>
+  	  			</div>
+  	  		</a>
+  	  		{% endfor %}
+  	  		
+    		</div>
+    		<div class="reports col-md-offset-1 col-md-10">
+    			{% for report in reports %}
+    			<a href="/reports/{{report.id}}">
+  	  			<div class="media report">
+  	  				<div class="media-left">
+  	  					<input type="checkbox" name="selectedReports" value="{{report.id}}" aria-label="...">
+  	  				</div>
+  	  				<div class="media-body">
+  	  					<span class="media-object glyphicon glyphicon-file"></span>
+  	  					<h4 class="media-heading">{{report.title}}</h4>
+  	  					<p class="">
+  	  						{{report.shortDescription}}
+  	  					</p>
+  	  				</div>
+  	  			</div>
+  	  		</a>
+  	  		{% endfor %}
+    		</div>
+    	</div>
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete the selected files?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" name="deleteButton" value="Delete" class="btn btn-danger">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Move Items</h4>
+            </div>
+            <div class="modal-body">
+              <h5>Move selected items to:</h5>
+              {% for folder in folders %}
+              <p><input type="radio" name="destinationFolder" value="{{folder.id}}"> {{folder.title}} </p>
+              {% endfor %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" value="Move" name="moveButton" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form method='POST'>
+      {% csrf_token %}
+    	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    		<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    					<h4 class="modal-title" id="myModalLabel">Add Folder or Report</h4>
+    				</div>
+    				<div class="modal-body">
+              Folder: <input type="radio" name="reportFolder" value="folder">
+              Report: <input type="radio" name="reportFolder" value="report">
+              <p>Folder Name: <p>
+              {{formset.addFolderForm.name}}
+              </br>
+              <p>Report Name: <p>
+              {{formset.addReportForm.title}}
+              <p>Group Name: <p>
+              {{formset.addReportForm.reportGroup}}
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    					<input type="submit" value="Add" class="btn btn-primary">
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </form>
+<style type="text/css">
+body{
+	background-color: #5bc0de;
+}
+.contents{
+	background-color: white;
+	border-radius: 5px;
+	min-height: 400px;
+	padding-top: 10px;
+}
+.folders{
+  padding-top: 10px;
+}
+.folder{
+	padding-top: 10px;
+	padding-left: 10px;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	margin-bottom: 10px; 
+}
+.report{
+	padding-top: 10px;
+	padding-left: 10px;
+	border-radius: 5px;
+	background-color: #f5f5f5;
+  margin-bottom: 10px; 
+}
+
+</style>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
+</body>
+</html>
+<!-- <div> class="conversations">
+	
+</div> -->
