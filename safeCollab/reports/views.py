@@ -214,6 +214,8 @@ def getFolder(request, folderID):
 					destinationFolder.save()
 				except Exception as e:
 					print("Exception! Adding to destination folder!")
+
+				
 			if request.POST.get('moveButton') == "Move":
 				try:
 					destinationFolderID = request.POST.get('destinationFolder')
@@ -312,5 +314,3 @@ def search(request):
 		}
 				
 	return render(request, 'report_search.html', context)
-
-
