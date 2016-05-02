@@ -2,11 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b394786-c958-40bc-ac9e-5676c569642a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cs3240-s16-team16.iml" afterPath="$PROJECT_DIR$/.idea/cs3240-s16-team16.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/files/initrd.img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/media/files/Code_Is_Law.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/templates/login/.index.html.swp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/make.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/media/file.img.enc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/0001_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/safeCollab/private_messages/migrations/__init__.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/db.sqlite3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/auditysonscorner-2016-01-14.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/auditysonscorner-2016-01-14_9gYCLs3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/auditysonscorner-2016-01-14_zGTAeMS.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/brownscar-2016-01-14.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/cricket_midhigh.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/fiatusaoftysonscorner-2016-01-14.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/hondaoftysonscorner-2016-01-14.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/low_pop.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/saffordauto-2016-01-14.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/files/wheee_high.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0002_report_owner.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0003_auto_20160423_2235.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0004_auto_20160423_2236.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0005_auto_20160423_2238.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0006_auto_20160424_1024.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/external/urls.py" afterPath="$PROJECT_DIR$/safeCollab/external/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/external/views.py" afterPath="$PROJECT_DIR$/safeCollab/external/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/reports/forms.py" afterPath="$PROJECT_DIR$/safeCollab/reports/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/reports/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/safeCollab/reports/migrations/0001_initial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/reports/models.py" afterPath="$PROJECT_DIR$/safeCollab/reports/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/reports/urls.py" afterPath="$PROJECT_DIR$/safeCollab/reports/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/reports/views.py" afterPath="$PROJECT_DIR$/safeCollab/reports/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/templates/login/index.html" afterPath="$PROJECT_DIR$/safeCollab/templates/login/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/templates/report.html" afterPath="$PROJECT_DIR$/safeCollab/templates/report.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/templates/report_folder.html" afterPath="$PROJECT_DIR$/safeCollab/templates/report_folder.html" />
     </list>
     <ignored path="cs3240-s16-team16.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,10 +60,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/safeCollab/external/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40419582">
+            <state vertical-scroll-proportion="0.0">
               <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -56,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/safeCollab/reports/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.05087209">
+              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -175,9 +204,9 @@
         <option value="$PROJECT_DIR$/safeCollab/upload/views.py" />
         <option value="$PROJECT_DIR$/safeCollab/external/admin.py" />
         <option value="$PROJECT_DIR$/safeCollab/login/models.py" />
-        <option value="$PROJECT_DIR$/safeCollab/reports/models.py" />
         <option value="$PROJECT_DIR$/safeCollab/external/views.py" />
         <option value="$PROJECT_DIR$/safeCollab/external/urls.py" />
+        <option value="$PROJECT_DIR$/safeCollab/reports/models.py" />
       </list>
     </option>
   </component>
@@ -805,13 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/reports/migrations/0002_report_owner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03526971">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/safeCollab/upload/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20987654">
@@ -953,16 +975,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/safeCollab/reports/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/safeCollab/upload/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
@@ -992,10 +1004,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/safeCollab/external/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40419582">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/safeCollab/reports/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05087209">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
