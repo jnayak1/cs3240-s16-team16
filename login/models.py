@@ -50,7 +50,7 @@ class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, related_name="user")
 
-    public_key = models.CharField()
+    public_key = models.CharField(max_length=512)
 
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
