@@ -12,6 +12,8 @@ from django.core.context_processors import csrf
 from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm, SearchForm, EditKeyWords
 from django.utils.timezone import now
 from itertools import chain
+from login.models import UserProfile
+from django.db.models import Q
 import re
 from django.contrib import messages
 
