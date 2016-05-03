@@ -22,17 +22,16 @@ from Crypto.Cipher import DES3
 from Crypto import Random
 
 
-def encrypt(message_content):
-	random_genterator = Random.new().read
-	key = RSA.generate(1024, random_genterator)
-	public_key = key.publickey()
+def encrypt(message_content, key):
+	rsa_key = RSA.importKey(key)
+	public_key = rsa_key.publickey()
 	retVal = public_key.encrypt(message_content.encode(), 32)[0]
-	# retVal = decrypt(retVal, key)
 	return retVal
 
 def decrypt(message_content, key):
+	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
-	retVal = key.decrypt(decryptable)
+	retVal = rsa_key.decrypt(decryptable)
 	return retVal
 
 @login_required

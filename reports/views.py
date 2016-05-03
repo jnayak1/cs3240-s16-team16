@@ -61,14 +61,14 @@ def getReport(request, reportID):
 			report.save()
 		formset['uploadFileForm'] = UploadFileForm(request.POST, request.FILES)
 		if formset['uploadFileForm'].is_valid():
-			if(formset['uploadFileForm'].data['uploadDelete'] == 'upload'):
+			if(request.POST.get('addFile') == "addFile"):
 				for item in request.POST.getlist('filesToAdd'):
 					fileToAdd = File.objects.get(id=item)
 					report.files.add(fileToAdd)
 					report.save()
 		formset['deleteFileForm'] = DeleteFileForm(request.POST)
 		if formset['deleteFileForm'].is_valid():
-			if(formset['deleteFileForm'].data['uploadDelete'] == 'delete'):
+			if(request.POST.get('deleteFile') == "deleteFile"):
 				checkedFiles = request.POST.getlist('checkedFiles')
 				for fileObj in checkedFiles:
 					File.objects.get(id=fileObj).delete()

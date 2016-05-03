@@ -12,6 +12,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django import forms
 
+import json
+import string
+import random
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import DES3
+from Crypto import Random
+
 def index(request):
     # Request the context of the request.
     group_list = request.user.groups.all()
@@ -411,6 +419,7 @@ def register(request):
     # A boolean value for telling the template whether the registration was successful.
     # Set to False initially. Code changes value to True when registration succeeds.
     registered = False
+    private_key = ""
 
     # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
@@ -432,7 +441,13 @@ def register(request):
             # Now sort out the UserProfile instance.
             # Since we need to set the user attribute ourselves, we set commit=False.
             # This delays saving the model until we're ready to avoid integrity problems.
+            random_generator = Random.new().read
+            key = RSA.generate(1024, random_generator)
+            private_key = key.exportKey()
+            # print(key.publickey().exportKey())
+            # print(len(key.publickey().exportKey()))
             profile = profile_form.save(commit=False)
+            profile.public_key = key.publickey().exportKey()
             profile.user = user
 
             # Did the user provide a profile picture?
@@ -459,8 +474,8 @@ def register(request):
 
     # Render the template depending on the context.
     return render(request,
-            'login/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+        'login/register.html',
+        {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'private_key': private_key} )
 
 def add_page(request, category_name_slug):
 

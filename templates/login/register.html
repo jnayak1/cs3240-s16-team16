@@ -9,6 +9,8 @@
 
         {% if registered %}
         <strong>Thank you for registering!</strong>
+        <h1>The following is your private key (save the whole thing and do not lose!):</h1>
+         {{private_key}}
         <a href="/login/">Return to the homepage.</a><br />
         {% else %}
         <strong>Register here!</strong><br />
