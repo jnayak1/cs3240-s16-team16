@@ -2,33 +2,90 @@
 <html>
     <head>
         <title>safeCollab</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     </head>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-
+    0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <body>
-        <h1>Register with safeCollab</h1>
 
-        {% if registered %}
-        <strong>Thank you for registering!</strong>
-        <h1>The following is your private key (save the whole thing and do not lose!):</h1>
-         {{private_key}}
-        <a href="/login/">Return to the homepage.</a><br />
-        {% else %}
-        <strong>Register here!</strong><br />
+     <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/login/">safeCollab</a>
+    </div>
 
-        <form id="user_form" method="post" action="/login/register/"
-                enctype="multipart/form-data">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/login/">Home <span class="sr-only">(current)</span></a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/login/messages">Messages</a></li>
+        <li class="dropdown">
+          <a href="/login/groups" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/login/groups">Make Group</a></li>
+            <li><a href="/login/category">Your Groups</a></li>
 
-            {% csrf_token %}
-
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
-        </form>
+          </ul>
+        </li>
         {% endif %}
+      </ul>
+  
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_staff %}
+            <li><a href="/login/add_staffManager">Add Site Manager</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><a href="/login/logout">Logout</a></li>
+        {% else %}
+        <li><a href="/login/login_page">Login</a></li>
+        <li><a href="/login/register">Register</a></li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+        <div class = "container">
+
+            <div class ="page-header">
+                <h1>Register with safeCollab</h1>
+            </div>
+
+            <div class="jumbotron">
+                {% if registered %}
+                <strong>Thank you for registering!</strong>
+                <h1>The following is your private key (save the whole thing and do not lose!):</h1>
+                 {{private_key}}
+                <a href="/login/">Return to the homepage.</a><br />
+                {% else %}
+                <!--<strong>Register here!</strong><br />-->
+
+                <form id="user_form" method="post" action="/login/register/"
+                        enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <!-- Display each form. The as_p method wraps each element in a paragraph
+                         (<p>) element. This ensures each element appears on a new line,
+                         making everything look neater. -->
+                    {{ user_form.as_p }}
+                    {{ profile_form.as_p }}
+
+                    <!-- Provide a button to click to submit the form. -->
+                    <input type="submit" class="btn btn-info" name="submit" value="Register" />
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
     </body>
 </html>

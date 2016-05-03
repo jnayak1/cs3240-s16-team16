@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>safeCollab</title>
-     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<html>
+
+    <body>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
       <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,17 +49,16 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-    {% if user.is_staff %}
+    {% if user.is_authenticated %}
     {% if done %}
-        <p>User(s) successfully deactivated! Return <a href="/login/">Home</a></p>
+        <p>User(s) successfully added! Return <a href="/login/">Home</a></p>
         {% else %}
-        <h1>Deactivate Users</h1>
+        <h1>Add Another Member</h1>
 
-        <form id="deactivate_form" method="post" action="/login/deactivate/">
+
+            <form id="form" method="post" action="/login/group/{{ groups.id }}/add_member/">
+
             {% csrf_token %}
-            {{ deactivate_form.as_p }}
-
-
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
@@ -72,15 +69,11 @@
                 {{ field }}
             {% endfor %}
 
-            <input type="submit" name="submit" value="Deactivate" />
+            <input type="submit" name="submit" value="Add User" />
+            
 
-        </form>
-        {% endif %}
-        {% else %}
-            <p>You are not authorized to access this page. Please go back and login. <a href='/login'>Go Back</a></p>
-        {% endif %}
-</head>
-<body>
+    {% endif %}
+    {% endif %}
+    </body>
 
-</body>
 </html>

@@ -305,7 +305,7 @@ def search(request):
 			if keyword in allreports.values_list('title', flat=True):
 				report = Report.objects.get(title=keyword)
 				reportWithSearchTitle.append(report)
-				appeared.append(keyword)
+				#appeared.append(keyword)
 				reportAppeared.append(report.title)
 				boolean = True
 			
@@ -313,26 +313,26 @@ def search(request):
 				title = Report.objects.get(title=report.title)
 				tags = pattern.split(report.keywords)
 				for tag in tags:
-					if (keyword == tag) and (tag not in appeared) and (keyword not in appeared) and (report.title not in reportAppeared):
+					if (keyword == tag) and (tag not in appeared) and (report.title not in reportAppeared):
 						reportWithMatchingTags.append(title)
-						appeared.append(keyword)
+						#appeared.append(keyword)
 						reportAppeared.append(report.title)
 						boolean = True
 						break
 				summary = pattern.split(report.shortDescription)
 				for summ in summary:
-					if (keyword == summ) and (keyword not in appeared) and (report.title not in reportAppeared):
+					if (keyword == summ) and (report.title not in reportAppeared):
 						reportWithMatchingSummary.append(title)
-						appeared.append(keyword)
+						#appeared.append(keyword)
 						reportAppeared.append(report.title)
 						boolean = True
 						break
 						#return HttpResponse(keyword)
 				descriptions = pattern.split(report.longDescription)
 				for description in descriptions:
-					if (keyword == description) and (keyword not in appeared) and (report.title not in reportAppeared):
+					if (keyword == description) and (report.title not in reportAppeared):
 						reportWithMatchingDescription.append(title)
-						appeared.append(keyword)
+						#appeared.append(keyword)
 						reportAppeared.append(report.title)
 						boolean = True
 						break

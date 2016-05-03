@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 from django.conf import settings
 
 
@@ -15,13 +15,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConversationLog',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+=======
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+>>>>>>> ee051a211cd124b1183d45a3943a0891c7733a3a
             ],
         ),
         migrations.CreateModel(
             name='Message',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+=======
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+>>>>>>> ee051a211cd124b1183d45a3943a0891c7733a3a
                 ('content', models.BinaryField()),
                 ('encrypted', models.BooleanField(default=False)),
                 ('sender', models.ForeignKey(to=settings.AUTH_USER_MODEL)),

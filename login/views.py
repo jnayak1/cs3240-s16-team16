@@ -10,6 +10,7 @@ from django.contrib.auth.models import Group, User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django import forms
 
 import json
 import string
@@ -29,7 +30,10 @@ def index(request):
 @login_required
 def sample_add_member(request, group_id):
     group=Group.objects.get(pk=group_id)
-    context_dict = {'groups': group}
+    temp = Group.objects.get(pk=group_id)
+    grp = Group.objects.get(name=temp.name)
+    grpusers = User.objects.filter(groups=grp)
+    context_dict = {'groups': group, 'groupmembers': grpusers, 'id': group_id}
     #return HttpResponse(group.name)
     return render(request, 'login/group.html', context_dict)
 
@@ -100,6 +104,8 @@ def deactivate(request):
 @login_required
 def siteManager(request):
     done = False
+    if request.user.is_staff == False:
+        HttpResponse("You are not authorized to access that location.")
     if request.method == 'POST':
         siteManager_form = SiteManagerForm(data = request.POST)
         if(siteManager_form.is_valid()):
@@ -135,7 +141,9 @@ def mygroups(request):
 # Sending user object to the form, to verify which fields to display/remove (depending on group)
     done = False
     if request.method == 'POST':
-        mygroupings_form = MyGroupingsForm(data=request.POST) ####NEW!
+        mygroupings_form = MyGroupingsForm(data=request.POST)
+        q = User.objects.exclude(username = request.user.username)
+        mygroupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 # FIXME: edit the save database code stuffs. it doesn't actually add anyone to the groups.
 # find oput how to display what groups you are in, not all the groups.
         # If the two forms are valid...
@@ -192,7 +200,9 @@ def mygroups(request):
 def groups(request):
     done = False
     if request.method == 'POST':
-        groupings_form = GroupingsForm(data=request.POST) ####NEW!
+        groupings_form = GroupingsForm(data=request.POST) 
+
+        #groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 
         # If the two forms are valid...
         if groupings_form.is_valid():# and group_form.is_valid():
@@ -246,6 +256,117 @@ def groups(request):
     return render(request,
             'login/groups.html',
             {'groupings_form': groupings_form, 'done': done} )
+
+
+@login_required
+def add_user(request, group_id):
+    done = False
+    grp = Group.objects.get(pk=group_id)
+    if request.method == 'POST':
+
+        form = MyGroupingsForm(data=request.POST, instance=grp)
+        users = grp.user_set.all()
+        q = User.objects.all()
+        for u in users:
+            q = q.exclude(username=u.username)
+        q = q.exclude(username=request.user.username)
+        q2 = Group.objects.filter(pk=group_id)
+        if(q.count() != 0):
+
+            form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+            form.fields['my_groups'] = forms.ModelMultipleChoiceField(queryset=q2, widget=forms.CheckboxSelectMultiple())
+            if form.is_valid():
+                try:
+
+                    mygroupings_form = form.save()
+
+                    mygroupings_form.save()
+
+
+                except IntegrityError as ex:
+                    print(ex)
+                    return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
+
+                gobject = form.cleaned_data['my_groups']
+                mems = form.cleaned_data['members']
+
+                for usr in mems:
+                    for g in gobject:
+                        usr.groups.add(g)
+
+                done = True
+            else:
+                print (form.errors)
+        else:
+            return HttpResponse("There are no more members to add. Please go back <a href='/login'>Go Back</a>")
+            
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        form = MyGroupingsForm(instance=grp)
+
+        form.fields['mygroups'] = forms.ModelMultipleChoiceField(queryset=request.user.groups.all())    #.exclude
+
+    # Render the template depending on the context.
+    group=Group.objects.get(pk=group_id)
+    return render(request,
+            'login/add_member.html',
+            {'form': form, 'groups':group, 'done': done} )
+
+@login_required
+def delete_user(request, group_id):
+
+    done = False
+    grp = Group.objects.get(pk=group_id)
+    if request.method == 'POST':
+
+        form = MyGroupingsForm(data=request.POST, instance=grp)
+        q = grp.user_set.all()
+        q = q.exclude(username=request.user.username)
+        q2 = Group.objects.filter(pk=group_id)
+
+        if(q.count() != 0):
+
+            form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+            form.fields['my_groups'] = forms.ModelMultipleChoiceField(queryset=q2, widget=forms.CheckboxSelectMultiple())
+            if form.is_valid():# and group_form.is_valid():
+                try:
+
+                    mygroupings_form = form.save()
+
+                    mygroupings_form.save()
+
+
+                except IntegrityError as ex:
+                    print(ex)
+                    return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
+
+                gobject = form.cleaned_data['my_groups']
+                mems = form.cleaned_data['members']
+
+                for usr in mems:
+                    for g in gobject:
+                        usr.groups.remove(g)
+
+                done = True
+
+            else:
+                print (form.errors)
+        else:
+            return HttpResponse("There are no members to delete, please go back. <a href='/login'>Go Back</a>")
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        form = MyGroupingsForm(instance=grp)
+
+        form.fields['mygroups'] = forms.ModelMultipleChoiceField(queryset=request.user.groups.all())    #.exclude
+
+    # Render the template depending on the context.
+    group=Group.objects.get(pk=group_id)
+    return render(request,
+            'login/delete_member.html',
+            {'form': form, 'groups':group, 'done': done} )
 
 
 @login_required
