@@ -1,0 +1,35 @@
+<html>
+
+    <body>
+    {% if user.is_staff %}
+    {% if done %}
+        <p>User(s) successfully deleted! Return <a href="/login/">Home</a></p>
+        {% else %}
+        <h1>Delete Group Member</h1>
+
+
+            <form id="form" method="post" action="/login/group/{{ groups.id }}/delete_member/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Delete User" />
+
+
+    {% endif %}
+
+    {%  else %}
+        <p>You are not authorized to access this page. Please return home.</p>
+    {% endif %}
+
+    </body>
+
+</html>

@@ -6,7 +6,7 @@
 
     </head>
 
-    <body>
+ <body>
         {% if user.is_authenticated %}
         {% if groups %}
         <h1>{{ groups.name }}</h1>
@@ -17,9 +17,32 @@
                 {% endfor %}
             </ul>
             {% else %}
-                <strong>No reports currently in group.</strong>
+                <strong>No reports currently in group.</strong><br><br>
             {% endif %}
-            <br><br><input id="uploadButton" type="button" value="Upload File"/><input id ="addGMem" type="button" value="Add User"/>
+            <form id="form" method="post" action="/login/group/{{ groups.id }}/add_member/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Add Users" /><br>
+            </form>
+            {% if user.is_staff %}
+            <form id="delete_userform" method="post" action="/login/group/{{ groups.id }}/delete_member/">
+            {% csrf_token %}
+
+            <input type="submit" name="submit" value="Delete Users">
+            </form>
+            {% endif %}
+            <!--<br><br><input id = "addGMem" type="button" value="Add User"/>-->
+
         {% else %}
             The specified group {{ group_name }} does not exist!
         {% endif %}
@@ -28,7 +51,7 @@
   
             <ul>
                 {% for groupmember in groupmembers %}
-                <li>{{ groupmember.uname }}</li>
+                <li>{{ groupmember.username }}</li>
                 {% endfor %}
             </ul>
         {%  else %}
@@ -38,11 +61,3 @@
     </body>
 </html>
 
-<script type="text/javascript">
-    document.getElementById("uploadButton").onclick = function () {
-        location.href = "/login/category/{{category_name}}/add_page/";
-    };
-    document.getElementById("addGMem").onclick = function () {
-        location.href = "/login/group/{{  groups.id }}/add_member/";
-    };
-</script>
