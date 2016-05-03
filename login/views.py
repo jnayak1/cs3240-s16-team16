@@ -199,8 +199,8 @@ def groups(request):
     done = False
     if request.method == 'POST':
         groupings_form = GroupingsForm(data=request.POST) 
-        q = User.objects.exclude(username = request.user.username)
-        groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+
+        #groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 
         # If the two forms are valid...
         if groupings_form.is_valid():# and group_form.is_valid():
@@ -264,37 +264,40 @@ def add_user(request, group_id):
 
         form = MyGroupingsForm(data=request.POST, instance=grp)
         users = grp.user_set.all()
-        q = ""
+        q = User.objects.all()
         for u in users:
-            q = User.objects.exclude(username=u.username)
+            q = q.exclude(username=u.username)
         q = q.exclude(username=request.user.username)
+        q2 = Group.objects.filter(pk=group_id)
+        if(q.count() != 0):
 
-        form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+            form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+            form.fields['my_groups'] = forms.ModelMultipleChoiceField(queryset=q2, widget=forms.CheckboxSelectMultiple())
+            if form.is_valid():
+                try:
 
-        if form.is_valid():# and group_form.is_valid():
-            try:
+                    mygroupings_form = form.save()
 
-                mygroupings_form = form.save()
-
-                mygroupings_form.save()
+                    mygroupings_form.save()
 
 
-            except IntegrityError as ex:
-                print(ex)
-                return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
+                except IntegrityError as ex:
+                    print(ex)
+                    return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
 
-            gobject = form.cleaned_data['my_groups']
-            mems = form.cleaned_data['members']
+                gobject = form.cleaned_data['my_groups']
+                mems = form.cleaned_data['members']
 
-            for usr in mems:
-                for g in gobject:
-                    usr.groups.add(g)
+                for usr in mems:
+                    for g in gobject:
+                        usr.groups.add(g)
 
-            done = True
-
+                done = True
+            else:
+                print (form.errors)
         else:
-            print (form.errors)
-
+            return HttpResponse("There are no more members to add. Please go back <a href='/login'>Go Back</a>")
+            
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     else:
@@ -318,32 +321,37 @@ def delete_user(request, group_id):
         form = MyGroupingsForm(data=request.POST, instance=grp)
         q = grp.user_set.all()
         q = q.exclude(username=request.user.username)
+        q2 = Group.objects.filter(pk=group_id)
 
-        form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+        if(q.count() != 0):
 
-        if form.is_valid():# and group_form.is_valid():
-            try:
+            form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+            form.fields['my_groups'] = forms.ModelMultipleChoiceField(queryset=q2, widget=forms.CheckboxSelectMultiple())
+            if form.is_valid():# and group_form.is_valid():
+                try:
 
-                mygroupings_form = form.save()
+                    mygroupings_form = form.save()
 
-                mygroupings_form.save()
+                    mygroupings_form.save()
 
 
-            except IntegrityError as ex:
-                print(ex)
-                return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
+                except IntegrityError as ex:
+                    print(ex)
+                    return HttpResponse("Return to previous page, there was a problem <a href='/login'>Go Back</a>")
 
-            gobject = form.cleaned_data['my_groups']
-            mems = form.cleaned_data['members']
+                gobject = form.cleaned_data['my_groups']
+                mems = form.cleaned_data['members']
 
-            for usr in mems:
-                for g in gobject:
-                    usr.groups.remove(g)
+                for usr in mems:
+                    for g in gobject:
+                        usr.groups.remove(g)
 
-            done = True
+                done = True
 
+            else:
+                print (form.errors)
         else:
-            print (form.errors)
+            return HttpResponse("There are no members to delete, please go back. <a href='/login'>Go Back</a>")
 
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
