@@ -26,6 +26,7 @@ def encrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	public_key = rsa_key.publickey()
 	retVal = public_key.encrypt(message_content.encode(), 32)[0]
+	# decrypt(message_content, key)
 	return retVal
 
 def decrypt(message_content, key):
