@@ -11,7 +11,7 @@ from reports.models import Folder, Report, File
 from django.core.context_processors import csrf
 from reports.forms import RemoveReportFolderForm, UploadFileForm, DeleteFileForm, AddCollaboratorForm, DeleteCollaboratorForm, EditSummaryForm, EditDescriptionForm, AddFolderForm, AddReportForm, MoveForm, SearchForm, EditKeyWords
 from django.utils.timezone import now
-from itertools import chain
+from itertools import chain 
 from login.models import UserProfile
 from django.db.models import Q
 import re
@@ -37,6 +37,10 @@ def getReport(request, reportID):
 
 	# report exists so there shouldn't be any exceptions
 	report = Report.objects.get(id=reportID)
+
+	isStaff = False
+	if request.user.is_staff == True:
+		is_staff = True
 
 	formset = {}
 	reportGroup = report.group
@@ -105,7 +109,7 @@ def getReport(request, reportID):
 	except Folder.DoesNotExist as e:
 		pass
 	collaboratingUsers = reportGroup.user_set.all()
-	owner = request.user == report.owner
+	owner = (request.user == report.owner) or isStaff
 	private = report.private
 	usersFiles = File.objects.filter(publisher=request.user)
 	print(usersFiles)
