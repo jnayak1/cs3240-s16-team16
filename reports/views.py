@@ -289,6 +289,7 @@ def search(request):
 		allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
 	    #allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
 		appeared = []
+		reportAppeared = []
 		reports = Report.objects.all()
 		#allreports = Report.objects.filter(user=request.user)
 		search_terms = request.POST['searchKey']
@@ -301,30 +302,34 @@ def search(request):
 				report = Report.objects.get(title=keyword)
 				reportWithSearchTitle.append(report)
 				appeared.append(keyword)
+				reportAppeared.append(report.title)
 				boolean = True
 			
 			for report in allreports:
 				title = Report.objects.get(title=report.title)
 				tags = pattern.split(report.keywords)
 				for tag in tags:
-					if (keyword == tag) and (tag not in appeared) and (keyword not in appeared) and not boolean:
+					if (keyword == tag) and (tag not in appeared) and (keyword not in appeared) and (report.title not in reportAppeared):
 						reportWithMatchingTags.append(title)
 						appeared.append(keyword)
+						reportAppeared.append(report.title)
 						boolean = True
 						break
 				summary = pattern.split(report.shortDescription)
 				for summ in summary:
-					if (keyword == summ) and (keyword not in appeared) and not boolean:
+					if (keyword == summ) and (keyword not in appeared) and (report.title not in reportAppeared):
 						reportWithMatchingSummary.append(title)
 						appeared.append(keyword)
+						reportAppeared.append(report.title)
 						boolean = True
 						break
 						#return HttpResponse(keyword)
 				descriptions = pattern.split(report.longDescription)
 				for description in descriptions:
-					if (keyword == description) and (keyword not in appeared) and not boolean:
+					if (keyword == description) and (keyword not in appeared) and (report.title not in reportAppeared):
 						reportWithMatchingDescription.append(title)
 						appeared.append(keyword)
+						reportAppeared.append(report.title)
 						boolean = True
 						break
 	context = {
