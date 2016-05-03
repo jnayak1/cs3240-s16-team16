@@ -2,7 +2,7 @@
 <html>
 
     <head>
-	<center><img src="../../static/logo.png">
+	<center>
         <title>safeCollab Login Page</title><center>
 	<style>
 	ul {
@@ -36,7 +36,7 @@
 	<ul id="menu">
 	{% if user.is_authenticated %}
 
-	<link rel="stylesheet" type="text/css" href="../static/horizontal.css">
+	<link>
         <li><a href="/login/restricted/">Restricted Page</a><br /></li>
         <li><a href="/login/add_category/">Add a New Category</a><br /></li>
         <li><a href="/login/add_page/">Add a New Page</a><br /></li>
