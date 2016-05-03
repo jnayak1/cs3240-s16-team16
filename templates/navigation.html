@@ -1,0 +1,38 @@
+<html>	
+	<style>
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 100;
+	    overflow: hidden;
+
+	}
+
+	li {
+	    float: left;
+	}
+
+	li a {
+	    display: inline-block;
+	    color: black;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	}
+
+	li a:hover {
+	    background-color: #ADD8e6;
+	}
+	</style>
+	<link>
+        <li><a href="/login/restricted/">Restricted Page</a><br /></li>
+        <!--<li><a href="/login/add_category/">Add a New Category</a><br /></li>-->
+        <li><a href="/login/groups/">Make Group</a><br /></li>
+        <li><a href="/reports">Reports</a><br /></li>
+        <li><a href="/private_messages/">Messages</a><br/></li>
+        {% if user.is_staff %}
+        <li><a href="/login/add_staffManager/">Add a Site Manager</a><br/><li>
+        <li><a href="/login/manage/">Manage Accounts</a><br/><li>
+        {% endif %}
+        <li><a href="/login/logout/">Logout</a><br /></li>
+</html>

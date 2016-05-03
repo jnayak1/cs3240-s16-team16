@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='File',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('timeStamp', models.DateTimeField(auto_now=True)),
                 ('content', models.BinaryField()),
@@ -27,24 +27,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Folder',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('title', models.CharField(max_length=100)),
                 ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('parentFolder', models.ForeignKey(null=True, blank=True, to='reports.Folder')),
+                ('parentFolder', models.ForeignKey(to='reports.Folder', blank=True, null=True)),
             ],
         ),
         migrations.CreateModel(
             name='Report',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('shortDescription', models.TextField(max_length=160)),
                 ('longDescription', models.TextField()),
                 ('timeStamp', models.DateTimeField(auto_now=True)),
                 ('private', models.BooleanField(default=True)),
-                ('keywords', models.TextField(max_length=500, default='')),
+                ('keywords', models.TextField(default='', max_length=500)),
                 ('collaborators', models.ManyToManyField(to=settings.AUTH_USER_MODEL, max_length=160)),
-                ('files', models.ManyToManyField(to='reports.File', blank=True)),
+                ('files', models.ManyToManyField(blank=True, to='reports.File')),
                 ('group', models.ForeignKey(to='auth.Group', related_name='group')),
                 ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='reporter')),
             ],
@@ -52,6 +52,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='folder',
             name='reports',
-            field=models.ManyToManyField(to='reports.Report', blank=True),
+            field=models.ManyToManyField(blank=True, to='reports.Report'),
         ),
     ]

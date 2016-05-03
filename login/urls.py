@@ -18,5 +18,7 @@ urlpatterns = patterns('',
     url(r'^delete_users/$', views.deleteUser, name='delete'),
     url(r'^activate/$', views.activate, name='activate'),
     url(r'^deactivate/$', views.deactivate, name='deactivate'),
+    url(r'^group/(?P<group_id>\w+)/add_member/$', views.add_user, name="adduser"),
+    url(r'^group/(?P<group_id>\w+)/delete_member/$', views.delete_user, name="deleteuser"),
     url(r'^login_page/$', views.user_login, name='login_page'),  # New!
 	)

@@ -53,6 +53,9 @@
     {% csrf_token %}
   	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
    	<div class="halfPanelContents col-md-11">
+   		{% if not reportWithSearchTitle %}
+   			<h5>There are no results.</h5>
+   		{% endif %}
 		{% for file in reportWithSearchTitle %}
 	    	<a href="/reports/{{file.id}}">
 	    		<div class="media folder">
@@ -82,6 +85,9 @@
     {% csrf_token %}
   	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
    	<div class="halfPanelContents col-md-11">
+   	   	{% if not reportWithMatchingTags %}
+   			<h5>There are no results.</h5>
+   		{% endif %}
 		{% for file in reportWithMatchingTags %}
 	    	<a href="/reports/{{file.id}}">
 	    		<div class="media folder">
@@ -109,6 +115,9 @@
     {% csrf_token %}
   	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
    	<div class="halfPanelContents col-md-11">
+   		{% if not reportWithMatchingSummary %}
+   			<h5>There are no results.</h5>
+   		{% endif %}
 		{% for file in reportWithMatchingSummary %}
 	    	<a href="/reports/{{file.id}}">
 	    		<div class="media folder">
@@ -136,6 +145,9 @@
     {% csrf_token %}
   	<div class="halfPanel panel panel-default col-md-offset-1 col-md-5">
    	<div class="halfPanelContents col-md-11">
+   	   	{% if not reportWithMatchingDescription %}
+   			<h5>There are no results.</h5>
+   		{% endif %}
 		{% for file in reportWithMatchingDescription %}
 	    	<a href="/reports/{{file.id}}">
 	    		<div class="media folder">

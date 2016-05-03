@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='public_key',
-            field=models.CharField(max_length=512),
+            field=models.CharField(max_length=271),
         ),
     ]
