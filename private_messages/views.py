@@ -13,9 +13,27 @@ from django.contrib import messages
 import re
 import binascii
 
-def encrypt(message_content):
-	return "not implemented"
+import json
+import string
+import random
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import DES3
+from Crypto import Random
 
+
+def encrypt(message_content):
+	random_genterator = Random.new().read
+	key = RSA.generate(1024, random_genterator)
+	public_key = key.publickey()
+	retVal = public_key.encrypt(message_content.encode(), 32)[0]
+	# retVal = decrypt(retVal, key)
+	return retVal
+
+def decrypt(message_content, key):
+	decryptable = (message_content,)
+	retVal = key.decrypt(decryptable)
+	return retVal
 
 @login_required
 def unread_messages(request):
@@ -73,7 +91,9 @@ def getConversation(request, conversationID):
 			except Exception:
 				pass
 			if isEncrypted:
-				encrypted_message = encrypt(message_content)
+				# encrypted_message = encrypt(message_content)
+				# message_content = encrypt(message_content)[0]
+				message_content = encrypt(message_content)
 			message = Message(sender=message_sender, content=message_content, encrypted=isEncrypted)
 			message.save()
 			active_conversation.log.add(message)

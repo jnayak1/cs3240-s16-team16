@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^(?P<username>[a-zA-Z0-9@\.\+\-\_\;\,\:\?\>\<\\\[\]\{\}\|]{0,30})/(?P<password>[a-zA-Z0-9@\.\+\-\_\;\,\:\?\>\<\\\[\]\{\}\|]{0,30})$', login, name="login"),
     url(r'^logout/(?P<userkey>[A-Z0-9]{256})$', logout, name='logout'),
     #Get the names of the reports the user can see
-    url(r'^GetReports/(?P<username>[0-9a-zA-Z0-9@\.\+\-\_]{0,30})/(?P<userkey>[A-Z0-9]{256})$', getReports, name='getReports'),
+    url(r'^GetReports/(?P<username>[a-zA-Z0-9@\.\+\-\_]{0,30})/(?P<userkey>[A-Z0-9]{256})$', getReports, name='getReports'),
     #Verify that the user has an active session and is still a user
     url(r'^verifyUser/(?P<username>[0-9a-zA-Z@\.\+\-\_]{0,30})/(?P<userkey>[A-Z0-9]{256})$', verifyUser, name='verifyUser'),
     #Handle uploading files
