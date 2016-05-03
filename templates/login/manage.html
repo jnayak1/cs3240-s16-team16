@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% if user.is_staff %}
 	<title>SafeCollab</title>
 	<h1>Manage Accounts:</h1>
 	<a href="/login/delete_users">Delete Users</a><br>
 	<a href="/login/activate">Activate Accounts</a><br>
 	<a href="/login/deactivate">Deactivate Accounts</a><br>
+	{% else %}
+	<p>You are not authorized to access this page. Please go back and login. <a href='/login'>Go Back</a></p>
+	{% endif %}
 </head>
 <body>
 </body>

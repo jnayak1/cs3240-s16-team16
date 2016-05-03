@@ -104,6 +104,8 @@ def deactivate(request):
 @login_required
 def siteManager(request):
     done = False
+    if request.user.is_staff == False:
+        HttpResponse("You are not authorized to access that location.")
     if request.method == 'POST':
         siteManager_form = SiteManagerForm(data = request.POST)
         if(siteManager_form.is_valid()):
