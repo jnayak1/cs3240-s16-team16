@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>safeCollab</title>
-
+    {% if user.is_staff %}
     {% if done %}
         <p>User(s) successfully activated! Return <a href="/login/">Home</a></p>
         {% else %}
@@ -28,7 +28,9 @@
 
         </form>
         {% endif %}
-
+        {% else %}
+            <p>You are not authorized to access this page. Please go back and login. <a href='/login'>Go Back</a></p>
+        {% endif %}
 </head>
 <body>
 
