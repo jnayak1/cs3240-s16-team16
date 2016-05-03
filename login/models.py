@@ -70,12 +70,7 @@ class Report(models.Model):
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, related_name="user")
-<<<<<<< HEAD
-=======
-
     public_key = models.CharField(max_length=512)
-
->>>>>>> 9e98bceda2e2d9a5e23575ba611e207a29f18270
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
     #picture = models.ImageField(upload_to='profile_images', blank=True)
