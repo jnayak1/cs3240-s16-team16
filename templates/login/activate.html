@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>safeCollab</title>
+
+    {% if done %}
+        <p>User(s) successfully activated! Return <a href="/login/">Home</a></p>
+        {% else %}
+        <h1>Activate Users</h1>
+
+        <form id="activate_form" method="post" action="/login/activate/">
+            {% csrf_token %}
+            {{ activate_form.as_p }}
+
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Activate" />
+
+        </form>
+        {% endif %}
+
+</head>
+<body>
+
+</body>
+</html>
