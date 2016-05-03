@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template import Context, RequestContext
 from django.contrib.auth.models import User
 from private_messages.models import Message, ConversationLog
+from login.models import UserProfile
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -25,11 +26,17 @@ from Crypto import Random
 def encrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	public_key = rsa_key.publickey()
+<<<<<<< HEAD
 	retVal = public_key.encrypt(message_content.encode(), 32)[0]
 	# decrypt(message_content, key)
+=======
+	retVal = public_key.encrypt(message_content, 32)[0]
+	print(retVal)
+>>>>>>> fe020905d2d7e88ce2ace9eaf52c050e4a2693b4
 	return retVal
 
 def decrypt(message_content, key):
+	print("decrypt:" + str(message_content))
 	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
 	retVal = rsa_key.decrypt(decryptable)
@@ -74,17 +81,34 @@ def getConversation(request, conversationID):
 	active_conversation = ConversationLog.objects.get(pk=conversationID)
 	active_conversation.readBy.add(request.user)
 
+	decrypted_active_conversation = []
+
+	for message in active_conversation.log.all():
+		if message.encrypted and request.method == 'POST' and request.POST.get('keybutton') == "Submit":
+		# try:
+			print("decrypting")
+			key = request.POST.get('privatekey')
+			print(key)
+			decrypted_message = decrypt(message.content, key)
+			decrypted_active_conversation.append(decrypted_message)
+			# except Exception:
+			print("Decrypting of message threw exception")
+			decrypted_active_conversation.append(message)
+		else:
+			decrypted_active_conversation.append(message)
 	# if user is not in the conversation, redirect to /private_messages/
 	if request.user not in active_conversation.participants.all():
 		messages.error(request, "You are not in that conversation.")
 		return HttpResponseRedirect('/private_messages/')
-	c = Context({'conversations': conversations, 'active_conversation': active_conversation})
+	c = Context({'conversations': conversations, 'decrypted_active_conversation': decrypted_active_conversation,
+		'active_conversation': active_conversation})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
 		if form.is_valid():
 			send_message = SendMessage(request.POST)
-			message_content = send_message.data['content']
+			message_content = send_message.data['content'].encode()
 			message_sender = request.user
+			message_receiver = active_conversation.participants.all().exclude(id=request.user.id)
 			isEncrypted = False;
 			try:
 				isEncrypted = send_message.data['encrypted']
@@ -93,7 +117,9 @@ def getConversation(request, conversationID):
 			if isEncrypted:
 				# encrypted_message = encrypt(message_content)
 				# message_content = encrypt(message_content)[0]
-				message_content = encrypt(message_content)
+				publickey = UserProfile.objects.get(user=message_receiver).public_key
+				message_content = encrypt(message_content, publickey)
+				print(message_content)
 			message = Message(sender=message_sender, content=message_content, encrypted=isEncrypted)
 			message.save()
 			active_conversation.log.add(message)
