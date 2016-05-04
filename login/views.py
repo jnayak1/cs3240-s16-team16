@@ -225,7 +225,7 @@ def groups(request):
     if request.method == 'POST':
 
         groupings_form = GroupingsForm(data=request.POST) 
-        q = Users.objects.all()
+        q = User.objects.all()
         q = q.exclude(request.user.username)
         groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 
