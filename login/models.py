@@ -77,7 +77,7 @@ class UserProfile(models.Model):
     user_type = models.CharField(max_length=16)
     #Hold all of the groups the user belongs to
     groups = models.ManyToManyField(Group, related_name="groups")
-    public_key = models.CharField(max_length = 271)
+    # public_key = models.CharField(max_length = 271)
     # Override the __unicode__() method to return out something meaningful!
     def __str__(self):
         return self.user.username

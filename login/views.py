@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django import forms
+from private_messages.views import unread_messages
 
 import json
 import string
@@ -23,7 +24,8 @@ from Crypto import Random
 def index(request):
     # Request the context of the request.
     group_list = request.user.groups.all()
-    context_dict = {'groups': group_list}
+    num_unread = unread_messages(request)
+    context_dict = {'groups': group_list, 'num_unread' : num_unread}
 
     # Render the response and send it back!
     return render(request, 'login/index.html', context_dict)
@@ -453,7 +455,7 @@ def register(request):
             # This delays saving the model until we're ready to avoid integrity problems.
             random_generator = Random.new().read
             key = RSA.generate(1024, random_generator)
-            private_key = key.exportKey()
+            private_key = key.exportKey('PEM')
             # print(key.publickey().exportKey())
             # print(len(key.publickey().exportKey()))
             profile = profile_form.save(commit=False)

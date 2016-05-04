@@ -26,17 +26,23 @@ from Crypto import Random
 def encrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	public_key = rsa_key.publickey()
-<<<<<<< HEAD
-	retVal = public_key.encrypt(message_content.encode(), 32)[0]
-	# decrypt(message_content, key)
-=======
 	retVal = public_key.encrypt(message_content, 32)[0]
-	print(retVal)
->>>>>>> fe020905d2d7e88ce2ace9eaf52c050e4a2693b4
 	return retVal
 
 def decrypt(message_content, key):
-	print("decrypt:" + str(message_content))
+	# print("decrypt:" + str(message_content))
+	# print("key:" + key)
+	lines = str.split(key)
+	# print(len(lines))
+	# for s in lines:
+	# 	print(s)
+	key = "-----BEGIN RSA PRIVATE KEY-----"
+	key = key + "\n" + lines[4] + "\n" + lines[5] + "\n" + lines[6] + "\n" +  lines[7]\
+		  + "\n" + lines[8] + "\n" + lines[9] + "\n" + lines[10] + "\n" + lines[11] \
+		  + "\n" + lines[12] + "\n" + lines[13] + "\n" + lines[14] + "\n" + lines[15] \
+		  + "\n" + lines[16] + "\n"
+	key = key + "-----END RSA PRIVATE KEY-----"
+	# print("Fixed key:" + key)
 	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
 	retVal = rsa_key.decrypt(decryptable)
@@ -51,7 +57,7 @@ def unread_messages(request):
 		if request.user in conversation.participants.all():
 			users_conversations.append(conversation)
 	for conversation in users_conversations:
-		if not conversation.filter(readBy__id=request.user.id).exists():
+		if not request.user in conversation.readBy.all():
 			num_unread = num_unread + 1;
 	return num_unread
 
@@ -81,27 +87,6 @@ def getConversation(request, conversationID):
 	active_conversation = ConversationLog.objects.get(pk=conversationID)
 	active_conversation.readBy.add(request.user)
 
-	decrypted_active_conversation = []
-
-	for message in active_conversation.log.all():
-		if message.encrypted and request.method == 'POST' and request.POST.get('keybutton') == "Submit":
-		# try:
-			print("decrypting")
-			key = request.POST.get('privatekey')
-			print(key)
-			decrypted_message = decrypt(message.content, key)
-			decrypted_active_conversation.append(decrypted_message)
-			# except Exception:
-			print("Decrypting of message threw exception")
-			decrypted_active_conversation.append(message)
-		else:
-			decrypted_active_conversation.append(message)
-	# if user is not in the conversation, redirect to /private_messages/
-	if request.user not in active_conversation.participants.all():
-		messages.error(request, "You are not in that conversation.")
-		return HttpResponseRedirect('/private_messages/')
-	c = Context({'conversations': conversations, 'decrypted_active_conversation': decrypted_active_conversation,
-		'active_conversation': active_conversation})
 	if request.method == 'POST':
 		form = SendMessage(request.POST)
 		if form.is_valid():
@@ -125,6 +110,32 @@ def getConversation(request, conversationID):
 			active_conversation.log.add(message)
 	else:
 		form = SendMessage()
+
+	decrypted_active_conversation = []
+
+	i = 0
+	for message in active_conversation.log.all():
+		if message.encrypted and request.method == 'POST' and (not request.user == message.sender) and (not request.POST.get('privatekey') == None):
+			key = request.POST.get('privatekey')
+			print(key)
+			print("####################################################################")
+			print(message.content)
+			decrypted_message = decrypt(message.content, key)
+			print(decrypted_message)
+			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
+			setattr(message, "content", decrypted_message)
+			setattr(message, "encrypted", False)
+			message.save()
+			decrypted_active_conversation.append(m)
+		else:
+			decrypted_active_conversation.append(message)
+		i+=1
+	# if user is not in the conversation, redirect to /private_messages/
+	if request.user not in active_conversation.participants.all():
+		messages.error(request, "You are not in that conversation.")
+		return HttpResponseRedirect('/private_messages/')
+	c = Context({'conversations': conversations, 'decrypted_active_conversation': decrypted_active_conversation,
+		'active_conversation': active_conversation})
 	c['form'] = form
 	c = RequestContext(request, c)
 	return render(request, 'private_messages.html', c)
@@ -140,6 +151,7 @@ def newConversation(request):
 		#if conversationForm.is_valid():
 		new_conversation = ConversationForm(request.POST)
 		participants = new_conversation.data['participants']
+		encrypted = request.POST.get('encrypt')
 		log = new_conversation.data['message']
 		pattern = re.compile("^\s+|\s*,\s*|\s+$")
 		if (participants != "") and (log != ""):
@@ -158,6 +170,8 @@ def newConversation(request):
 					printout += " "
 				printout += ". Please send the message again."
 				return HttpResponse(printout)
+			elif len(users) > 2:
+				return HttpResponse("Please only enter your username and the username of the desired recipient")
 			else:
 				active_conversation = ConversationLog()
 				active_conversation.save()
@@ -169,10 +183,17 @@ def newConversation(request):
 					#p+=str(currentUser)
 					#return HttpResponse(p)
 					#conversation.participants.add(currentUser)
-				
 				active_conversation.participants.add(User.objects.get(username=request.user))
 				message_sender = request.user
-				message = Message(sender=message_sender, content=bytes(log, "UTF-8"))
+				message_receiver = active_conversation.participants.all().exclude(id=request.user.id)
+				if encrypted:
+					publickey = UserProfile.objects.get(user=message_receiver).public_key
+					message_content = encrypt(log.encode(), publickey)
+					enc = True
+				else:
+					message_content = bytes(log, "UTF-8")
+					enc = False
+				message = Message(sender=message_sender, content=message_content, encrypted = enc)
 				message.save()
 				active_conversation.log.add(message)
 				active_conversation.save()
@@ -187,8 +208,7 @@ def newConversation(request):
 		#return HttpResponse("WOAH")
 	else:
 		conversationForm = ConversationForm()
-		
-		
+
 	return render(request, 'new_conversation.html', {})
 
 @login_required
