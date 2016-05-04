@@ -23,7 +23,7 @@ from Crypto import Random
 def index(request):
     # Request the context of the request.
     if len(User.objects.filter(username="sitemgr"))==0:
-        user=User.objects.create(username="sitemgr",password='admin',email='admin@gmail.com')
+        user=User.objects.create_superuser(username="sitemgr",password='admin',email='admin@gmail.com')
         user.is_staff = True
         user.save()
 
@@ -35,7 +35,9 @@ def index(request):
         private_key = key.exportKey()
             # print(key.publickey().exportKey())
             # print(len(key.publickey().exportKey()))
-        profile_form = UserProfile.objects.create(website="https://www.google.com")
+        publicKey = key.publickey().exportKey()
+
+        profile_form = UserProfile.objects.create(website="https://www.google.com", public_key=publicKey, user=user, user_type = superuser)
         profile = profile_form.save()
         profile.public_key = key.publickey().exportKey()
         profile.user = user
