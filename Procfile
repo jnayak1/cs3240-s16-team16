@@ -1,1 +1,1 @@
-web: gunicorn safeCollab.wsgi --log-file-
+web: gunicorn safeCollab.wsgi --log-file -
