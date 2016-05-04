@@ -38,7 +38,7 @@ def index(request):
             # print(len(key.publickey().exportKey()))
         publicKey = key.publickey().exportKey()
 
-        profile_form = UserProfile.objects.create(website="https://www.google.com", public_key=publicKey, user=user, user_type = superuser)
+        profile_form = UserProfile.objects.create(website="https://www.google.com", public_key=publicKey, user=user, user_type ="superuser")
         profile = profile_form.save()
         profile.public_key = key.publickey().exportKey()
         profile.user = user
