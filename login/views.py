@@ -40,7 +40,7 @@ def index(request):
 
         profile_form = UserProfile.objects.create(website="https://www.google.com", public_key=publicKey, user=user, user_type ="superuser")
         profile = profile_form.save()
-        profile.public_key = key.publickey().exportKey()
+        # profile.public_key = key.publickey().exportKey()
         profile.user = user
         profile.save()
 
