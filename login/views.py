@@ -22,6 +22,25 @@ from Crypto import Random
 
 def index(request):
     # Request the context of the request.
+    if len(User.objects.filter(username="sitemgr"))==0:
+        user=User.objects.create(username="sitemgr",password='admin',email='admin@gmail.com')
+        user.is_staff = True
+        user.save()
+
+            # Now sort out the UserProfile instance.
+            # Since we need to set the user attribute ourselves, we set commit=False.
+            # This delays saving the model until we're ready to avoid integrity problems.
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
+        private_key = key.exportKey()
+            # print(key.publickey().exportKey())
+            # print(len(key.publickey().exportKey()))
+        profile_form = UserProfile.objects.create(website="https://www.google.com")
+        profile = profile_form.save()
+        profile.public_key = key.publickey().exportKey()
+        profile.user = user
+        profile.save()
+
     group_list = request.user.groups.all()
     context_dict = {'groups': group_list}
 
