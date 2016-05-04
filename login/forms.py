@@ -16,6 +16,7 @@ class CategoryForm(forms.ModelForm):
 
 class SiteManagerForm(forms.ModelForm):
     #name = forms.CharField(max_length=128, help_text="Please choose a user.")
+    name = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=False), widget=forms.CheckboxSelectMultiple())
     class Meta:
         model = SiteManager
         fields = ('name',)
@@ -27,11 +28,11 @@ class GroupingsForm(forms.ModelForm):
         fields = ('name', 'members')
 
 class MyGroupingsForm(forms.ModelForm):
-    mygroups = forms.ModelMultipleChoiceField(queryset=Group.objects.all())
+    my_groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all())
     members = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple())
     class Meta:
         model = Groupings
-        fields = ('members', 'mygroups')
+        fields = ('members', 'my_groups')
 
 class ActivateUserForm(forms.ModelForm):
     username = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_active=False), widget=forms.CheckboxSelectMultiple())

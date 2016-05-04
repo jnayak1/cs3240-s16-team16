@@ -221,9 +221,11 @@ def mygroups(request):
 def groups(request):
     done = False
     if request.method == 'POST':
-        groupings_form = GroupingsForm(data=request.POST) 
 
-        #groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+        groupings_form = GroupingsForm(data=request.POST) 
+        q = Users.objects.all()
+        q = q.exclude(request.user.username)
+        groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 
         # If the two forms are valid...
         if groupings_form.is_valid():# and group_form.is_valid():
