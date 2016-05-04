@@ -47,7 +47,7 @@ def decrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
 	retVal = rsa_key.decrypt(decryptable)
-	return retVal
+	return string_at(retVal, 600)
 
 @login_required
 def unread_messages(request):
