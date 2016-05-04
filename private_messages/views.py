@@ -21,6 +21,7 @@ from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3
 from Crypto import Random
+from ctypes import string_at
 
 
 def encrypt(message_content, key):
@@ -120,7 +121,7 @@ def getConversation(request, conversationID):
 			print(key)
 			print("####################################################################")
 			print(message.content)
-			decrypted_message = decrypt(message.content, key)
+			decrypted_message = decrypt(string_at(message.content), key)
 			print(decrypted_message)
 			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
 			setattr(message, "content", decrypted_message)
