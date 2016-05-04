@@ -295,6 +295,10 @@
                 {{f.title}}
                 </p>
               {% endfor %}
+              {% if usersFiles %}
+              {% else %}
+                <b>You have not uploaded any files on the File Download Aplication<b/>
+              {% endif %}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
