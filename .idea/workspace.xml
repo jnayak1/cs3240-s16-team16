@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b394786-c958-40bc-ac9e-5676c569642a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reports/migrations/0002_auto_20160504_0156.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/external/views.py" afterPath="$PROJECT_DIR$/external/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login/forms.py" afterPath="$PROJECT_DIR$/login/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/login/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login/views.py" afterPath="$PROJECT_DIR$/login/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/private_messages/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/private_messages/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/safeCollab/settings.py" afterPath="$PROJECT_DIR$/safeCollab/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login/activate.html" afterPath="$PROJECT_DIR$/templates/login/activate.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login/login_page.html" afterPath="$PROJECT_DIR$/templates/login/login_page.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/login/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/private_messages/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/reports/migrations/0002_auto_20160504_0156.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reports/views.py" afterPath="$PROJECT_DIR$/reports/views.py" />
     </list>
     <ignored path="cs3240-s16-team16.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +36,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/external/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.91962177">
-              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.23640662">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -898,8 +894,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/external/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91962177">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23640662">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
