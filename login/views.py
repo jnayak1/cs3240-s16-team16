@@ -2,7 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from login.models import Category
 from django.shortcuts import render
-from login.models import Page
+from login.models import Page, UserProfile
 from login.forms import CategoryForm
 from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm, DeleteUserForm, ActivateUserForm, DeactivateUserForm
 from django.contrib.auth import authenticate, login
