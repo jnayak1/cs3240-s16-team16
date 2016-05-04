@@ -287,7 +287,9 @@ def search(request):
 		groups = request.user.groups.all()
 
 		allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
-	    #allreports = Report.objects.filter(Q(group__in=groups.all())|Q(private=False)).all()
+	    #allreports = Report.objects.filter(Q
+		if request.user.is_staff:
+			allreports = Report.objects.all()
 		appeared = []
 		reportAppeared = []
 		reports = Report.objects.all()
