@@ -47,7 +47,7 @@ def decrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
 	retVal = rsa_key.decrypt(decryptable)
-	return str(retVal)
+	return retVal
 
 @login_required
 def unread_messages(request):
@@ -121,7 +121,7 @@ def getConversation(request, conversationID):
 			print(key)
 			print("####################################################################")
 			print(message.content)
-			decrypted_message = decrypt(message.content, key)
+			decrypted_message = ctypes.cast(decrypt(message.content, key), str)
 			print(decrypted_message)
 			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
 			setattr(message, "content", decrypted_message)
