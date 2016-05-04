@@ -57,6 +57,9 @@
         <p>User(s) successfully activated! Return <a href="/login/">Home</a></p>
         {% else %}
         <h1>Activate Users</h1>
+        {% if invalid %}
+          <p>No deactivated users to deactivate</p>
+        {% endif %}
 
         <form id="activate_form" method="post" action="/login/activate/">
             {% csrf_token %}

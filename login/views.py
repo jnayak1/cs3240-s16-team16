@@ -2,7 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from login.models import Category
 from django.shortcuts import render
-from login.models import Page
+from login.models import Page, UserProfile
 from login.forms import CategoryForm
 from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm, DeleteUserForm, ActivateUserForm, DeactivateUserForm
 from django.contrib.auth import authenticate, login
@@ -23,6 +23,27 @@ from Crypto import Random
 
 def index(request):
     # Request the context of the request.
+    if len(User.objects.filter(username="sitemgr"))==0:
+        user=User.objects.create_superuser(username="sitemgr",password='admin',email='admin@gmail.com')
+        user.is_staff = True
+        user.save()
+
+            # Now sort out the UserProfile instance.
+            # Since we need to set the user attribute ourselves, we set commit=False.
+            # This delays saving the model until we're ready to avoid integrity problems.
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
+        private_key = key.exportKey()
+            # print(key.publickey().exportKey())
+            # print(len(key.publickey().exportKey()))
+        publicKey = key.publickey().exportKey()
+
+        profile_form = UserProfile.objects.create(website="https://www.google.com", public_key=publicKey, user=user, user_type = superuser)
+        profile = profile_form.save()
+        profile.public_key = key.publickey().exportKey()
+        profile.user = user
+        profile.save()
+
     group_list = request.user.groups.all()
     num_unread = unread_messages(request)
     context_dict = {'groups': group_list, 'num_unread' : num_unread}
@@ -202,9 +223,11 @@ def mygroups(request):
 def groups(request):
     done = False
     if request.method == 'POST':
-        groupings_form = GroupingsForm(data=request.POST) 
 
-        #groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
+        groupings_form = GroupingsForm(data=request.POST) 
+        q = User.objects.all()
+        # q = q.exclude(request.user.username)
+        groupings_form.fields['members'] = forms.ModelMultipleChoiceField(queryset=q, widget=forms.CheckboxSelectMultiple())
 
         # If the two forms are valid...
         if groupings_form.is_valid():# and group_form.is_valid():

@@ -15,21 +15,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConversationLog',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
-=======
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
->>>>>>> ee051a211cd124b1183d45a3943a0891c7733a3a
             ],
         ),
         migrations.CreateModel(
             name='Message',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
-=======
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
->>>>>>> ee051a211cd124b1183d45a3943a0891c7733a3a
                 ('content', models.BinaryField()),
                 ('encrypted', models.BooleanField(default=False)),
                 ('sender', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
@@ -48,6 +40,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='conversationlog',
             name='readBy',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name='readBy'),
+            field=models.ManyToManyField(related_name='readBy', to=settings.AUTH_USER_MODEL),
         ),
     ]

@@ -68,9 +68,15 @@ def getReports(request, username, userkey):
     retVal = {}
     groups = Group.objects.none()
 
-    for profile in UserProfile.objects.all():
-        user = profile.user
-        name = user.username
+    # for profile in User.objects.all():
+    #     user = profile.user
+    #     name = user.username
+    #     if username == name:
+    #         groups = profile.groups.all()
+
+
+    for profile in User.objects.all():
+        name = profile.username
         if username == name:
             groups = profile.groups.all()
 
