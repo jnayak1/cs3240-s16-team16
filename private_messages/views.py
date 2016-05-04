@@ -189,7 +189,7 @@ def newConversation(request):
 				message_receiver = active_conversation.participants.all().exclude(id=request.user.id)
 				if encrypted:
 					publickey = UserProfile.objects.get(user=message_receiver).public_key
-					message_content = str(encrypt(log.encode(), publickey))
+					message_content = bytes(str(encrypt(log.encode(), publickey)), "UTF-8")
 					enc = True
 				else:
 					message_content = bytes(log, "UTF-8")
