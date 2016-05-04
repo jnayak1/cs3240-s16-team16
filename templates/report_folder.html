@@ -92,13 +92,14 @@
         <li class="active">{{ pwd.title }}</li>
 		  </ol>
   	</div>
-    <div>
+    <div class="search col-md-offset-2">
        <form id="new_search" action="/reports/search/" method='POST' >
              {% csrf_token %}
              <input type="text" name="searchKey" value="" size="50" />
              <input type="submit" value="Search" /><!--onclick="closeWindow();"/> -->
       </form>
-      </div>
+    </div>
+
   	<br>  
 
     <form method='POST'>
