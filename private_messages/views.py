@@ -104,7 +104,7 @@ def getConversation(request, conversationID):
 				# encrypted_message = encrypt(message_content)
 				# message_content = encrypt(message_content)[0]
 				publickey = UserProfile.objects.get(user=message_receiver).public_key
-				message_content = encrypt(message_content, publickey)
+				message_content = str(encrypt(message_content, publickey))
 				print(message_content)
 			message = Message(sender=message_sender, content=message_content, encrypted=isEncrypted)
 			message.save()
@@ -121,7 +121,7 @@ def getConversation(request, conversationID):
 			print(key)
 			print("####################################################################")
 			print(message.content)
-			decrypted_message = ctypes.cast(decrypt(message.content, key), str)
+			decrypted_message = decrypt(str(message.content), key)
 			print(decrypted_message)
 			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
 			setattr(message, "content", decrypted_message)
@@ -189,7 +189,7 @@ def newConversation(request):
 				message_receiver = active_conversation.participants.all().exclude(id=request.user.id)
 				if encrypted:
 					publickey = UserProfile.objects.get(user=message_receiver).public_key
-					message_content = encrypt(log.encode(), publickey)
+					message_content = str(encrypt(log.encode(), publickey))
 					enc = True
 				else:
 					message_content = bytes(log, "UTF-8")
