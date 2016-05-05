@@ -16,7 +16,7 @@ class CategoryForm(forms.ModelForm):
 
 class SiteManagerForm(forms.ModelForm):
     #name = forms.CharField(max_length=128, help_text="Please choose a user.")
-    name = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=False), widget=forms.CheckboxSelectMultiple())
+    #name = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=False), widget=forms.CheckboxSelectMultiple())
     class Meta:
         model = SiteManager
         fields = ('name',)

@@ -136,7 +136,7 @@ def deleteReport(request, reportID):
 	if request.user == report.owner:
 		report.delete()
 	else:
-		messages.error("You are not the owner of the report so you cannot delete the")
+		messages.error(request,"You are not the owner of the report so you cannot delete the")
 	return HttpResponseRedirect('/reports/folder/' + str(parentFolder.id))
 
 @login_required

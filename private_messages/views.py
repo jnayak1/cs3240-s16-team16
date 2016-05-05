@@ -121,15 +121,16 @@ def getConversation(request, conversationID):
 			print(key)
 			print("####################################################################")
 			print(message.content)
-			decrypted_message = decrypt(str(message.content), key)
+
+			decrypted_message = decrypt(bytes(message.content), key)
 			print(decrypted_message)
 			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
 			setattr(message, "content", decrypted_message)
 			setattr(message, "encrypted", False)
 			message.save()
-			decrypted_active_conversation.append(m)
+			decrypted_active_conversation.append((bytes(m.content),m.encrypted, message.sender))
 		else:
-			decrypted_active_conversation.append(message)
+			decrypted_active_conversation.append((bytes(message.content), message.encrypted, message.sender))
 		i+=1
 	# if user is not in the conversation, redirect to /private_messages/
 	if request.user not in active_conversation.participants.all():
