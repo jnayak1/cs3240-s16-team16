@@ -165,7 +165,7 @@ def getFolder(request, folderID):
 			if formset['addReportForm'].data['reportFolder'] == 'report':
 				# group must exist 
 				if not Group.objects.filter(name=formset['addReportForm'].data['reportGroup']).exists():
-					messages.error("Group does not exist.")
+					messages.error(request,"Group does not exist.")
 					return HttpResponseRedirect('/reports/folder/' + str(folderID))
 
 				collaboratingGroup = Group.objects.get(name=formset['addReportForm'].data['reportGroup'])
