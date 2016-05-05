@@ -21,7 +21,6 @@ from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3
 from Crypto import Random
-from ctypes import string_at
 
 
 def encrypt(message_content, key):
@@ -47,7 +46,8 @@ def decrypt(message_content, key):
 	rsa_key = RSA.importKey(key)
 	decryptable = (message_content,)
 	retVal = rsa_key.decrypt(decryptable)
-	return string_at(retVal, 600)
+	# print(str(retVal))
+	return retVal
 
 @login_required
 def unread_messages(request):
@@ -121,7 +121,6 @@ def getConversation(request, conversationID):
 			print(key)
 			print("####################################################################")
 			print(message.content)
-
 			decrypted_message = decrypt(bytes(message.content), key)
 			print(decrypted_message)
 			m = Message(sender=message.sender, content=decrypted_message, encrypted=False)
