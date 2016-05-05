@@ -104,7 +104,7 @@ def getConversation(request, conversationID):
 				# encrypted_message = encrypt(message_content)
 				# message_content = encrypt(message_content)[0]
 				publickey = UserProfile.objects.get(user=message_receiver).public_key
-				message_content = str(encrypt(message_content, publickey))
+				message_content = encrypt(message_content, publickey)
 				print(message_content)
 			message = Message(sender=message_sender, content=message_content, encrypted=isEncrypted)
 			message.save()
