@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from login.models import Category
 from django.shortcuts import render
 from login.models import Page, UserProfile
+from reports.models import Report
 from login.forms import CategoryForm
 from login.forms import PageForm, UserForm, UserProfileForm, GroupingsForm, MyGroupingsForm, SiteManagerForm, DeleteUserForm, ActivateUserForm, DeactivateUserForm
 from django.contrib.auth import authenticate, login
@@ -60,7 +61,8 @@ def sample_add_member(request, group_id):
     temp = Group.objects.get(pk=group_id)
     grp = Group.objects.get(name=temp.name)
     grpusers = User.objects.filter(groups=grp)
-    context_dict = {'groups': group, 'groupmembers': grpusers, 'id': group_id}
+    pages = Report.objects.filter(group=grp)
+    context_dict = {'groups': group, 'groupmembers': grpusers, 'id': group_id, 'pages': pages}
     #return HttpResponse(group.name)
     return render(request, 'login/group.html', context_dict)
 
